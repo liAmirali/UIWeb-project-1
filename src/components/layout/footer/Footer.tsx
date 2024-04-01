@@ -45,8 +45,8 @@ const pages2 = [
 
 const Footer: FC = () => {
   return (
-    <footer className="bg-primary-500 flex flex-col px-40 py-10 text-white">
-      <div className="flex justify-between w-full flex-wrap">
+    <footer className="bg-primary-500 flex flex-col px-40 text-white">
+      <div className="flex justify-between w-full flex-wrap pt-10 pb-20">
         <FooterContactUs />
 
         <FooterPages header={header1} pages={pages1} />
