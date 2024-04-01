@@ -1,5 +1,5 @@
 import classNames from "@/utils/classNames";
-import { FC, InputHTMLAttributes, ReactNode } from "react";
+import { FC, InputHTMLAttributes } from "react";
 
 interface Props extends InputHTMLAttributes<HTMLInputElement> {
   iconUrl?: string;

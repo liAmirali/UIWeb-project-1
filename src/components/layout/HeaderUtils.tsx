@@ -18,9 +18,7 @@ const HeaderUtils: FC = () => {
       <div className="relative">
         <Image src="/icons/huge-icon/ecommerce/outline/cart.svg" alt="" width="24" height="24" />
         <div className="size-4 absolute -top-2 -right-2 rounded-full bg-primary-500 z-[1] flex items-center justify-center p-2.5">
-          <span className="font-bold text-white text-sm">
-            2
-          </span>
+          <span className="font-bold text-white text-sm">2</span>
         </div>
       </div>
     </div>

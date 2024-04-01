@@ -8,7 +8,7 @@ const Header: FC = () => {
   return (
     <div className="px-40 py-10">
       {/* Main Segment */}
-      <div className="flex justify-around">
+      <div className="flex justify-between">
         {/* Logo */}
         <div>
           <Image src="/images/logo.svg" alt="Electro Logo" width="178" height="35" />
