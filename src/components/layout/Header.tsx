@@ -1,12 +1,14 @@
 import Image from "next/image";
 import { FC } from "react";
 import AppSearch from "../common/AppSearch";
+import HeaderUtils from "./HeaderUtils";
+import Button from "../common/Button";
 
 const Header: FC = () => {
   return (
     <div className="px-40 py-10">
       {/* Main Segment */}
-      <div className="flex">
+      <div className="flex justify-around">
         {/* Logo */}
         <div>
           <Image src="/images/logo.svg" alt="Electro Logo" width="178" height="35" />
@@ -15,9 +17,13 @@ const Header: FC = () => {
         {/* Search Bar */}
         <AppSearch />
 
-        {/* Util Icons */}
+        <div className="flex gap-5">
+          {/* Util Icons */}
+          <HeaderUtils />
 
-        {/* Login/Register Button */}
+          {/* Login/Register Button */}
+          <Button>Login</Button>
+        </div>
       </div>
 
       {/* Nav Segment */}

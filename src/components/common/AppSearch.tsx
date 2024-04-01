@@ -23,10 +23,11 @@ const AppSearch: FC = () => {
           placeholder="Search"
           className="rounded-l-none border-l-0"
         />
-        <Button className="rounded-l-none">Search</Button>
       </div>
       {/* Submit */}
-      <div></div>
+      <div>
+        <Button className="rounded-l-none">Search</Button>
+      </div>
     </div>
   );
 };
