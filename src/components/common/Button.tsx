@@ -5,7 +5,7 @@ import DynamicSvg from "../icons/DynamicSvg";
 
 interface Props extends PropsWithChildren {
   size?: "xl" | "lg" | "md" | "sm";
-  style?: "primary" | "white";
+  style?: "primary" | "white" | "gray";
   className?: string;
   leftIconUrl?: string;
   rightIconUrl?: string;
@@ -25,6 +25,8 @@ const Button: FC<Props> = ({
         "cursor-pointer rounded-lg text-white flex gap-x-3",
         style === "primary"
           ? "bg-primary-500 hover:bg-primary-400 [border:none]"
+          : style === "gray"
+          ? "bg-gray-500 bg-opacity-10"
           : "bg-white-500 border",
         size === "xl"
           ? "py-4 px-10 text-lg"
