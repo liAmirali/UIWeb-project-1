@@ -1,6 +1,7 @@
 import classNames from "@/utils/classNames";
 import Image from "next/image";
-import { FC, PropsWithChildren } from "react";
+import { FC, PropsWithChildren, Suspense } from "react";
+import DynamicSvg from "../icons/DynamicSvg";
 
 interface Props extends PropsWithChildren {
   size?: "xl" | "lg" | "md" | "sm";
@@ -21,7 +22,7 @@ const Button: FC<Props> = ({
   return (
     <button
       className={classNames(
-        "cursor-pointer rounded-lg text-white",
+        "cursor-pointer rounded-lg text-white flex gap-x-3",
         style === "primary"
           ? "bg-primary-500 hover:bg-primary-400 [border:none]"
           : "bg-white-500 border",
@@ -37,28 +38,21 @@ const Button: FC<Props> = ({
         className
       )}
     >
-      <div
-        className={classNames("flex", style === "primary" ? "text-white" : "text-dark-500")}
-        style={{
-          ...(leftIconUrl
-            ? {
-                backgroundImage: `url('${leftIconUrl}')`,
-                backgroundRepeat: "no-repeat",
-                backgroundPositionX: "left",
-                paddingLeft: "24px",
-              }
-            : rightIconUrl
-            ? {
-                backgroundImage: `url('${rightIconUrl}')`,
-                backgroundRepeat: "no-repeat",
-                backgroundPositionX: "24px",
-                paddingRight: "24px",
-              }
-            : undefined),
-        }}
-      >
+      {leftIconUrl && (
+        <Suspense fallback={<>Loading...</>}>
+          <DynamicSvg path={leftIconUrl} />
+        </Suspense>
+      )}
+
+      <div className={classNames("flex", style === "primary" ? "text-white" : "text-dark-500")}>
         {children}
       </div>
+
+      {rightIconUrl && (
+        <Suspense fallback={<>Loading...</>}>
+          <DynamicSvg path={rightIconUrl} />
+        </Suspense>
+      )}
     </button>
   );
 };

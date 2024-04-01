@@ -49,7 +49,7 @@ const Navigation: FC = () => {
       </ul>
 
       {/* Categories */}
-      <div className="flex items-center bg-[#A5A9AC] bg-opacity-5 px-5 p-3 absolute left-0">
+      <div className="flex items-center bg-gray-500 bg-opacity-5 px-5 p-3 absolute left-0">
         <Image
           className="mr-4"
           src="/icons/huge-icon/menu/solid/menu-line-horizontal.svg"

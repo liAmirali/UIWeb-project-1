@@ -12,7 +12,7 @@ const FooterSubscribe: FC = () => {
         <div>Enter your email below to be the first to know about new collections.</div>
       </div>
 
-      <div className="flex h-14 rounded-lg bg-[#A5A9AC] bg-opacity-5 p-4 gap-x-4">
+      <div className="flex h-14 rounded-lg bg-gray-500 bg-opacity-5 p-4 gap-x-4">
         <div>
           <GmailIcon />
         </div>
