@@ -1,6 +1,6 @@
 import { FC } from "react";
 
-import LogoWhite from "@/public/images/logo-white.png";
+import LogoWhite from "@/public/images/logo/logo-white.png";
 
 import CallIcon from "@/public/icons/huge-icon/communication/outline/calling.svg";
 import GmailIcon from "@/public/icons/huge-icon/social/outline/gmail.svg";

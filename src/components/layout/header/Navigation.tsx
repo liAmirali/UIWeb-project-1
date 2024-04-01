@@ -27,7 +27,7 @@ const navigationItems = [
 
 const Navigation: FC = () => {
   return (
-    <div className="flex justify-center items-center relative mx-40">
+    <div className="flex justify-center items-center relative mx-40 py-4 -mt-6">
       <ul className="flex items-center gap-10">
         {navigationItems.map((item) => (
           <li

@@ -11,7 +11,7 @@ const Header: FC = () => {
       <div className="flex justify-between">
         {/* Logo */}
         <div>
-          <Image src="/images/logo.svg" alt="Electro Logo" width="178" height="35" />
+          <Image src="/images/logo/logo.svg" alt="Electro Logo" width="178" height="35" />
         </div>
 
         {/* Search Bar */}
