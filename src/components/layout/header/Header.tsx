@@ -1,8 +1,8 @@
+import AppSearch from "@/components/common/AppSearch";
 import Image from "next/image";
 import { FC } from "react";
-import AppSearch from "../common/AppSearch";
 import HeaderUtils from "./HeaderUtils";
-import Button from "../common/Button";
+import Button from "@/components/common/Button";
 
 const Header: FC = () => {
   return (
