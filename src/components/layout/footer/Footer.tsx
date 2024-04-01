@@ -5,15 +5,53 @@ import FooterContactUs from "./FooterContactUs";
 import FooterPages from "./FooterPages";
 import FooterSubscribe from "./FooterSubscribe";
 
+const header1 = "Information";
+const pages1 = [
+  {
+    label: "My Account",
+  },
+  {
+    label: "Login",
+  },
+  {
+    label: "My Cart",
+  },
+  {
+    label: "My Whishlist",
+  },
+  {
+    label: "Checkout",
+  },
+];
+
+const header2 = "Service";
+const pages2 = [
+  {
+    label: "About Us",
+  },
+  {
+    label: "Careers",
+  },
+  {
+    label: "Delivery Information",
+  },
+  {
+    label: "Privacy Policy",
+  },
+  {
+    label: "Terms & Conditions",
+  },
+];
+
 const Footer: FC = () => {
   return (
     <footer className="bg-primary-500 flex flex-col px-40 py-10 text-white">
       <div className="flex justify-between w-full flex-wrap">
         <FooterContactUs />
 
-        <FooterPages />
+        <FooterPages header={header1} pages={pages1} />
 
-        <FooterPages />
+        <FooterPages header={header2} pages={pages2} />
 
         <FooterSubscribe />
       </div>
