@@ -21,8 +21,10 @@ const Button: FC<Props> = ({
   return (
     <button
       className={classNames(
-        " rounded-lg text-white",
-        style === "primary" ? "bg-primary-500 text-white" : "bg-white-500 text-dark-500 border",
+        "cursor-pointer rounded-lg text-white",
+        style === "primary"
+          ? "bg-primary-500 hover:bg-primary-400 [border:none]"
+          : "bg-white-500 border",
         size === "xl"
           ? "py-4 px-10 text-lg"
           : size === "lg"
@@ -36,12 +38,23 @@ const Button: FC<Props> = ({
       )}
     >
       <div
-        className="flex"
+        className={classNames("flex", style === "primary" ? "text-white" : "text-dark-500")}
         style={{
-          backgroundImage: `url('${leftIconUrl}')`,
-          backgroundRepeat: "no-repeat",
-          backgroundPosition: "left",
-          paddingLeft: "24px"
+          ...(leftIconUrl
+            ? {
+                backgroundImage: `url('${leftIconUrl}')`,
+                backgroundRepeat: "no-repeat",
+                backgroundPositionX: "left",
+                paddingLeft: "24px",
+              }
+            : rightIconUrl
+            ? {
+                backgroundImage: `url('${rightIconUrl}')`,
+                backgroundRepeat: "no-repeat",
+                backgroundPositionX: "24px",
+                paddingRight: "24px",
+              }
+            : undefined),
         }}
       >
         {children}

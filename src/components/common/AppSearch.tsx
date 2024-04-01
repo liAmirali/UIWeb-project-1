@@ -4,19 +4,19 @@ import Button from "./Button";
 
 const AppSearch: FC = () => {
   return (
-    <div>
+    <div className="flex">
       {/* Category */}
-      <div></div>
-      {/* Input */}
       <div>
         <Button
           className="rounded-r-none"
           style="white"
-          leftIconUrl="/icons/huge-icon/arrows/solid/direction-down 01.svg"
+          rightIconUrl="/icons/huge-icon/arrows/solid/direction-down 01.svg"
         >
           All
         </Button>
-
+      </div>
+      {/* Input */}
+      <div>
         <Input
           type="search"
           iconUrl={"/icons/huge-icon/interface/solid/search 02.svg"}
