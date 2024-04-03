@@ -59,6 +59,54 @@ export default function Home() {
           },
         ]}
       />
+
+      <ProductGrid
+        heading="Top Selling Products"
+        products={[
+          {
+            title: "Apple iPad Pro Wi-Fi",
+            price: 1520,
+            image: "/images/products/top-selling/image 32.png",
+            rating: 5,
+          },
+          {
+            title: "Panasonic Lumix DC-GH5 II",
+            price: 1500,
+            image: "/images/products/top-selling/image 24.png",
+            rating: 4,
+          },
+          {
+            title: "Asus ROG Delta S  ",
+            price: 250,
+            image: "/images/products/top-selling/image 25.png",
+            rating: 5,
+          },
+          {
+            title: "Xiaomi Fimi X8 Mini",
+            price: 650,
+            image: "/images/products/top-selling/image 26.png",
+            rating: 5,
+          },
+          {
+            title: "Apple iPhone 13",
+            price: 500,
+            image: "/images/products/top-selling/image 27.png",
+            rating: 3,
+          },
+          {
+            title: "Fossil Gen 6 Smart Watch",
+            price: 450,
+            image: "/images/products/top-selling/image 28.png",
+            rating: 5,
+          },
+          {
+            title: "Apple iPad Air Wi-Fi",
+            price: 850,
+            image: "/images/products/top-selling/image 29.png",
+            rating: 5,
+          },
+        ]}
+      />
     </div>
   );
 }
