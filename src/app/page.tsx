@@ -1,3 +1,4 @@
+import CoverCallToAction from "@/components/common/CoverCallToAction";
 import MainHero from "@/components/homepage/MainHero";
 import OnSaleProducts from "@/components/homepage/OnSaleProducts";
 import ProductGrid from "@/components/homepage/ProductGrid";
@@ -58,6 +59,13 @@ export default function Home() {
             rating: 5,
           },
         ]}
+      />
+
+      <CoverCallToAction
+        bgImageUrl="/images/bg/iphone-bg.png"
+        heading="Apple iPhone 13 Pro Max"
+        description="Don’t miss the last opportunity."
+        buttonLabel="Shop Now"
       />
 
       <ProductGrid
