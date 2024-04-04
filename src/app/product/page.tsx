@@ -1,5 +1,6 @@
 import Breadcrumb from "@/components/common/Breadcrumb";
 import ProductDetails from "@/components/products/ProductDetails";
+import ProductInfo from "@/components/products/ProductInfo";
 import { FC } from "react";
 
 const ProductPage: FC = () => {
@@ -8,6 +9,8 @@ const ProductPage: FC = () => {
       <Breadcrumb />
 
       <ProductDetails />
+
+      <ProductInfo />
     </div>
   );
 };
