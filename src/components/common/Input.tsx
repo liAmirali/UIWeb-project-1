@@ -3,21 +3,37 @@ import { FC, InputHTMLAttributes } from "react";
 
 interface Props extends InputHTMLAttributes<HTMLInputElement> {
   iconUrl?: string;
-  className?: string;
+  label?: string;
+  labelClassName?: string;
+  containerClassName?: string;
 }
 
-const Input: FC<Props> = ({ iconUrl, className, ...inputProps }) => {
+const Input: FC<Props> = ({
+  iconUrl,
+  label,
+  labelClassName,
+  containerClassName,
+  className,
+  ...inputProps
+}) => {
   return (
-    <input
-      className={classNames("border outline-none rounded-lg py-3 px-4", className)}
-      style={{
-        background: iconUrl && `url('${iconUrl}') no-repeat left`,
-        backgroundPositionX: "1rem",
-        backgroundSize: "1.5rem",
-        paddingLeft: iconUrl && "3rem",
-      }}
-      {...inputProps}
-    />
+    <div className={classNames("flex flex-col", containerClassName)}>
+      {label && <label className={classNames("text-xs", labelClassName)}>{label}</label>}
+      <input
+        className={classNames("border outline-none rounded-lg py-3 px-4", className)}
+        style={
+          iconUrl
+            ? {
+                background: `url('${iconUrl}') no-repeat left`,
+                backgroundPositionX: "1rem",
+                backgroundSize: "1.5rem",
+                paddingLeft: "3rem",
+              }
+            : undefined
+        }
+        {...inputProps}
+      />
+    </div>
   );
 };
 
