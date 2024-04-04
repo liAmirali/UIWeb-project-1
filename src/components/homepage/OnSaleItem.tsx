@@ -2,6 +2,7 @@ import { FC } from "react";
 import Button from "../common/Button";
 import classNames from "@/utils/classNames";
 import Image from "next/image";
+import Badge from "../common/Badge";
 
 interface Props {
   heading: string;
@@ -21,9 +22,7 @@ const OnSaleItem: FC<Props> = ({ badge, heading, description, link, image, class
       )}
     >
       {badge && (
-        <div className="bg-primary-500 bg-opacity-10 text-primary-500 p-2 uppercase rounded-md text-xs">
-          {badge}
-        </div>
+        <Badge text="50% OFF" />
       )}
       <h4 className="font-bold text-3xl">{heading}</h4>
       {description && <p>{description}</p>}

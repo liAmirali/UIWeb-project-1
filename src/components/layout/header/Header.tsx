@@ -11,7 +11,7 @@ import OTPModal from "@/components/modals/OTPModal";
 import SuccessfulLoginModal from "@/components/modals/SuccessfulLoginModal";
 
 const Header: FC = () => {
-  const [showLoginModal, setShowLoginModal] = useState(true);
+  const [showLoginModal, setShowLoginModal] = useState(false);
 
   return (
     <div className="px-40 py-10">
