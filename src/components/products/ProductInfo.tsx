@@ -45,7 +45,7 @@ const ProductInfo: FC = () => {
       </div>
 
       {/* Content */}
-      <div>
+      <div className="py-4">
         {activeTab === "description" && <ProductDescription />}
         {activeTab === "additionalInfo" && <ProductAdditionalInfo />}
         {activeTab === "reviews" && <ProductReviews />}
