@@ -10,8 +10,8 @@ import ProductCounter from "./ProductCounter";
 
 const ProductDetails: FC = () => {
   return (
-    <div>
-      <div className="space-y-8">
+    <div className="flex flex-row-reverse">
+      <div className="space-y-8 flex-1">
         <div className="flex justify-between">
           <b className="text-4xl">Apple iPhone 14 Pro</b>
           <Badge text="In Stock" color="success" />
@@ -40,7 +40,7 @@ const ProductDetails: FC = () => {
           <FavoriteIcon />
         </div>
       </div>
-      <ProductImages />
+      <ProductImages className="flex-1" />
     </div>
   );
 };
