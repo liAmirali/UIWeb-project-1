@@ -8,6 +8,7 @@ import Button from "@/components/common/Button";
 import LoginModal from "@/components/modals/LoginModal";
 import RegisterModal from "@/components/modals/RegisterModal";
 import OTPModal from "@/components/modals/OTPModal";
+import SuccessfulLoginModal from "@/components/modals/SuccessfulLoginModal";
 
 const Header: FC = () => {
   const [showLoginModal, setShowLoginModal] = useState(true);
@@ -33,7 +34,7 @@ const Header: FC = () => {
         </div>
       </div>
 
-      {showLoginModal && <OTPModal />}
+      {showLoginModal && <SuccessfulLoginModal />}
     </div>
   );
 };
