@@ -6,12 +6,17 @@ import { FC, useState } from "react";
 import HeaderUtils from "./HeaderUtils";
 import Button from "@/components/common/Button";
 import LoginModal from "@/components/modals/LoginModal";
+import { usePathname } from "next/navigation";
+import classNames from "@/utils/classNames";
 
 const Header: FC = () => {
   const [showLoginModal, setShowLoginModal] = useState(false);
 
+  const pathname = usePathname();
+  console.log("pathname:", pathname);
+
   return (
-    <div className="px-40 py-10">
+    <div className={classNames("px-40 py-10")}>
       {/* Main Segment */}
       <div className="flex justify-between">
         {/* Logo */}

@@ -4,6 +4,9 @@ import "./globals.css";
 import Header from "@/components/layout/header/Header";
 import Navigation from "@/components/layout/header/Navigation";
 import Footer from "@/components/layout/footer/Footer";
+import { usePathname } from "next/navigation";
+import classNames from "@/utils/classNames";
+import WholeHeader from "@/components/layout/header/WholeHeader";
 
 const montserrat = Montserrat({ subsets: ["latin"] });
 
@@ -20,8 +23,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={montserrat.className}>
-        <Header />
-        <Navigation />
+        <WholeHeader />
         {children}
         <Footer />
       </body>
