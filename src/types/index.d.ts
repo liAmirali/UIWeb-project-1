@@ -14,3 +14,8 @@ type ReviewItemT = {
   date: string;
   reviewBy: string;
 };
+
+interface ModalProps {
+  open: boolean;
+  setOpen: React.Dispatch<React.SetStateAction<boolean>>;
+}

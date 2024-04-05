@@ -6,10 +6,6 @@ import { FC, useState } from "react";
 import HeaderUtils from "./HeaderUtils";
 import Button from "@/components/common/Button";
 import LoginModal from "@/components/modals/LoginModal";
-import RegisterModal from "@/components/modals/RegisterModal";
-import OTPModal from "@/components/modals/OTPModal";
-import SuccessfulLoginModal from "@/components/modals/SuccessfulLoginModal";
-import CartList from "@/components/products/CartList";
 
 const Header: FC = () => {
   const [showLoginModal, setShowLoginModal] = useState(false);
@@ -35,7 +31,7 @@ const Header: FC = () => {
         </div>
       </div>
 
-      {showLoginModal && <CartList />}
+      <LoginModal open={showLoginModal} setOpen={setShowLoginModal} />
     </div>
   );
 };

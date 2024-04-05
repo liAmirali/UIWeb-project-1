@@ -4,22 +4,22 @@ import Card from "../common/Card";
 import Input from "../common/Input";
 import Button from "../common/Button";
 import classNames from "@/utils/classNames";
+import SuccessfulLoginModal from "./SuccessfulLoginModal";
 
 const OTP_LEN = 5;
 
-const OTPModal: FC = () => {
+interface Props extends ModalProps {}
+
+const OTPModal: FC<Props> = ({ open, setOpen }) => {
+  const [showSuccessfulLoginModal, setShowSuccessfulLoginModal] = useState(false);
+
   const inputRefs = useRef<(HTMLInputElement | null)[]>([]);
   const [inputValues, setInputValues] = useState<(number | "")[]>(
     Array.from(Array(OTP_LEN).keys()).map((i) => "")
   );
 
-  console.log("inputRefs:", inputRefs);
-
   const handleInputChange = (e: ChangeEvent<HTMLInputElement>, index: number) => {
     const { value } = e.target;
-
-    console.log("e:", e);
-    console.log("i:", index);
 
     if (value.length > 0) {
       setInputValues((prevValue) => {
@@ -40,8 +40,6 @@ const OTPModal: FC = () => {
   const handleInputFocus = (e: ChangeEvent<HTMLInputElement>, index: number) => {
     const { value } = e.target;
 
-    console.log("HIII");
-
     if (value.length > 0) {
       setInputValues((prevValue) => {
         const newValues = Array.from(prevValue);
@@ -51,40 +49,55 @@ const OTPModal: FC = () => {
     }
   };
 
+  const handleClose = () => {
+    setOpen(false);
+  };
+
   return (
-    <Modal open={true} onClose={() => {}}>
-      <Card className="flex flex-col max-w-[27rem] p-5">
-        <b className="text-3xl">Enter OTP</b>
-        <span className="text-gray-500 mb-8">
-          We have share a code of your registered email address kristin.watson@example.com
-        </span>
+    <>
+      <Modal open={!showSuccessfulLoginModal && open} onClose={handleClose}>
+        <Card className="flex flex-col max-w-[27rem] p-5">
+          <b className="text-3xl">Enter OTP</b>
+          <span className="text-gray-500 mb-8">
+            We have share a code of your registered email address kristin.watson@example.com
+          </span>
 
-        <div className="flex justify-between">
-          {inputValues.map((val, i) => (
-            <Input
-              key={i}
-              value={val}
-              containerClassName="size-[3.75rem]"
-              className={classNames(
-                "w-full h-full text-center text-2xl",
-                val ? "border-primary-500" : undefined
-              )}
-              autoComplete="off"
-              type="number"
-              onChange={(e) => handleInputChange(e, i)}
-              onFocus={(e) => handleInputFocus(e, i)}
-              inputRef={(input) => {
-                inputRefs.current[i] = input;
+          <div className="flex justify-between">
+            {inputValues.map((val, i) => (
+              <Input
+                key={i}
+                value={val}
+                containerClassName="size-[3.75rem]"
+                className={classNames(
+                  "w-full h-full text-center text-2xl",
+                  val ? "border-primary-500" : undefined
+                )}
+                autoComplete="off"
+                type="number"
+                onChange={(e) => handleInputChange(e, i)}
+                onFocus={(e) => handleInputFocus(e, i)}
+                inputRef={(input) => {
+                  inputRefs.current[i] = input;
+                }}
+              />
+            ))}
+          </div>
+
+          <div className="flex flex-col mt-8">
+            <Button
+              onClick={() => {
+                setOpen(false);
+                setShowSuccessfulLoginModal(true);
               }}
-            />
-          ))}
-        </div>
+            >
+              Send OTP
+            </Button>
+          </div>
+        </Card>
+      </Modal>
 
-        <div className="flex flex-col mt-8">
-          <Button>Send OTP</Button>
-        </div>
-      </Card>
-    </Modal>
+      <SuccessfulLoginModal open={showSuccessfulLoginModal} setOpen={setShowSuccessfulLoginModal} />
+    </>
   );
 };
 

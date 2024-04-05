@@ -4,9 +4,15 @@ import Card from "../common/Card";
 import Button from "../common/Button";
 import CircularIcon from "../common/CircularIcon";
 
-const SuccessfulLoginModal: FC = () => {
+interface Props extends ModalProps {}
+
+const SuccessfulLoginModal: FC<Props> = ({ open, setOpen }) => {
+  const handleClose = () => {
+    setOpen(false);
+  };
+
   return (
-    <Modal open={true} onClose={() => {}}>
+    <Modal open={open} onClose={handleClose} noCloseButton>
       <Card className="flex flex-col items-center max-w-[27rem] p-5 space-y-6">
         <CircularIcon color="primary" iconUrl="/icons/huge-icon/device/outline/lock.svg" />
 
@@ -16,7 +22,13 @@ const SuccessfulLoginModal: FC = () => {
         </span>
 
         <div className="flex flex-col mt-8 self-stretch">
-          <Button>Back to Login</Button>
+          <Button
+            onClick={() => {
+              handleClose();
+            }}
+          >
+            Back to Login
+          </Button>
         </div>
       </Card>
     </Modal>
