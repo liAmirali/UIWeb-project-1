@@ -3,6 +3,7 @@ import MainHero from "@/components/homepage/MainHero";
 import OnSaleProducts from "@/components/homepage/OnSaleProducts";
 import ProductGrid from "@/components/homepage/ProductGrid";
 import ShopCategories from "@/components/homepage/ShopCategories";
+import ShopFeatures from "@/components/homepage/ShopFeatures";
 
 export default function Home() {
   return (
@@ -115,6 +116,8 @@ export default function Home() {
           },
         ]}
       />
+
+      <ShopFeatures />
     </div>
   );
 }
