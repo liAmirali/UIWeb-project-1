@@ -9,9 +9,10 @@ import LoginModal from "@/components/modals/LoginModal";
 import RegisterModal from "@/components/modals/RegisterModal";
 import OTPModal from "@/components/modals/OTPModal";
 import SuccessfulLoginModal from "@/components/modals/SuccessfulLoginModal";
+import CartList from "@/components/products/CartList";
 
 const Header: FC = () => {
-  const [showLoginModal, setShowLoginModal] = useState(false);
+  const [showLoginModal, setShowLoginModal] = useState(true);
 
   return (
     <div className="px-40 py-10">
@@ -34,7 +35,7 @@ const Header: FC = () => {
         </div>
       </div>
 
-      {showLoginModal && <SuccessfulLoginModal />}
+      {showLoginModal && <CartList />}
     </div>
   );
 };
