@@ -1,6 +1,8 @@
 import Breadcrumb from "@/components/common/Breadcrumb";
 import ProductDetails from "@/components/products/ProductDetails";
 import ProductInfo from "@/components/products/ProductInfo";
+import RelatedProducts from "@/components/products/RelatedProducts";
+
 import { FC } from "react";
 
 const ProductPage: FC = () => {
@@ -11,6 +13,8 @@ const ProductPage: FC = () => {
       <ProductDetails />
 
       <ProductInfo />
+
+      <RelatedProducts />
     </div>
   );
 };

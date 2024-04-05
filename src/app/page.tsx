@@ -84,7 +84,7 @@ export default function Home() {
             rating: 4,
           },
           {
-            title: "Asus ROG Delta S  ",
+            title: "Asus ROG Delta S",
             price: 250,
             image: "/images/products/top-selling/image 25.png",
             rating: 5,
