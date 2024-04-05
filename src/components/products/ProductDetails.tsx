@@ -10,7 +10,7 @@ import ProductCounter from "./ProductCounter";
 
 const ProductDetails: FC = () => {
   return (
-    <div className="flex flex-row-reverse">
+    <div className="flex flex-row-reverse gap-x-6">
       <div className="space-y-8 flex-1">
         <div className="flex justify-between">
           <b className="text-4xl">Apple iPhone 14 Pro</b>
@@ -33,13 +33,14 @@ const ProductDetails: FC = () => {
         <ProductColors />
 
         <div className="flex items-center justify-between gap-x-8">
-          <ProductCounter className="self-stretch" />
+          <ProductCounter className="w-32 self-stretch" />
 
           <Button className="flex-1">Add to Cart</Button>
 
           <FavoriteIcon />
         </div>
       </div>
+
       <ProductImages className="flex-1" />
     </div>
   );

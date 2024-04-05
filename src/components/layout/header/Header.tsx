@@ -12,7 +12,7 @@ import SuccessfulLoginModal from "@/components/modals/SuccessfulLoginModal";
 import CartList from "@/components/products/CartList";
 
 const Header: FC = () => {
-  const [showLoginModal, setShowLoginModal] = useState(true);
+  const [showLoginModal, setShowLoginModal] = useState(false);
 
   return (
     <div className="px-40 py-10">

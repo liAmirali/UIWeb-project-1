@@ -11,11 +11,11 @@ interface Props {
 const ProductCounter: FC<Props> = ({ className }) => {
   return (
     <div className={classNames("flex border rounded-lg", className)}>
-      <span className="px-3 h-full flex items-center border-r">
+      <span className="h-full flex items-center justify-center flex-1 border-r">
         <MinusIcon />
       </span>
-      <span className="px-3 h-full flex items-center">1</span>
-      <span className="px-3 h-full flex items-center border-l">
+      <span className="h-full flex items-center justify-center flex-1">1</span>
+      <span className="h-full flex items-center justify-center flex-1 border-l">
         <PlusIcon />
       </span>
     </div>
