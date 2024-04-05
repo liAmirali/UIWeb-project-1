@@ -3,6 +3,7 @@ import { FC } from "react";
 
 import HeadphoneDude from "@/public/images/bg/headphone-dude.png";
 import Button from "../common/Button";
+import Link from "next/link";
 
 const MainHero: FC = () => {
   return (
@@ -32,7 +33,9 @@ const MainHero: FC = () => {
           <br /> looking at its layout. The point of using Lorem Ipsum.
         </p>
 
-        <Button rightIconUrl="/icons/huge-icon/arrows/solid/arrow-right.svg">Shop Now</Button>
+        <Link href="/product">
+          <Button rightIconUrl="/icons/huge-icon/arrows/solid/arrow-right.svg">Shop Now</Button>
+        </Link>
       </div>
     </div>
   );
