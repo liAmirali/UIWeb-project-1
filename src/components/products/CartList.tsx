@@ -5,7 +5,9 @@ import Image from "next/image";
 import TrashIcon from "@/public/icons/huge-icon/interface/outline/trash.svg";
 import Button from "../common/Button";
 
-const CartList: FC = () => {
+interface Props extends ModalProps {}
+
+const CartList: FC<Props> = ({ open, setOpen }) => {
   const cart = [
     {
       title: "Apple iPhone 14 Pro",
@@ -21,9 +23,13 @@ const CartList: FC = () => {
     },
   ];
 
+  const handleClose = () => {
+    setOpen(false);
+  }
+
   return (
-    <Modal open={true} onClose={() => {}} className="!justify-end">
-      <div className="flex flex-col bg-white self-stretch float-right py-4 px-6 space-y-8 min-w-[25rem]">
+    <Modal open={open} onClose={handleClose} className="!justify-end items-stretch" noCloseButton>
+      <div className="flex-1 flex flex-col bg-white self-stretch float-right py-4 px-6 space-y-8 min-w-[25rem]">
         <span>
           You have <span className="font-bold">2 items</span> items in your cart
         </span>
@@ -56,7 +62,7 @@ const CartList: FC = () => {
 
           <div className="flex flex-col gap-y-2">
             <Button style="gray">View Cart</Button>
-            <Button>Checkout</Button>
+            <Button onClick={handleClose}>Checkout</Button>
           </div>
         </div>
       </div>
