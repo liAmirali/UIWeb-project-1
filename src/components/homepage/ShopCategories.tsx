@@ -48,7 +48,7 @@ const ShopCategories: FC = () => {
         </div>
       </div>
 
-      <div className="flex justify-between">
+      <div className="flex justify-between gap-4 flex-wrap">
         {categories.map((category, index) => (
           <CategoryItem key={index} image={category.image} title={category.title} />
         ))}
