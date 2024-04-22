@@ -4,7 +4,7 @@ import Badge from "../common/Badge";
 import Rating from "./Rating";
 import ProductColors from "./ProductColors";
 
-import FavoriteIcon from "@/public/icons/huge-icon/ecommerce/outline/favourite.svg";
+import FavoriteIcon from "@/public/icons/huge-icon/ecommerce/outline/favourite.svg?react";
 import Button from "../common/Button";
 import ProductCounter from "./ProductCounter";
 

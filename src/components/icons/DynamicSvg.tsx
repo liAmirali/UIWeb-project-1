@@ -1,4 +1,3 @@
-import dynamic from "next/dynamic";
 import { ComponentProps, FC } from "react";
 
 interface Props {
@@ -7,9 +6,10 @@ interface Props {
 }
 
 const DynamicSvg: FC<Props> = ({ path, svgProps }) => {
-  const Svg = dynamic(() => import("../../../public" + path));
+  // const Svg = dynamic(() => import("../../../public" + path));
 
-  return <Svg {...svgProps} />;
+  // return <Svg {...svgProps} />;
+  return <></>
 };
 
 export default DynamicSvg;

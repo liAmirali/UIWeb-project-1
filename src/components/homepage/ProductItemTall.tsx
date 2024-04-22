@@ -1,5 +1,5 @@
 import classNames from "@/utils/classNames";
-import Image from "next/image";
+
 import { FC } from "react";
 
 interface Props {
@@ -14,7 +14,7 @@ const ProductItemTall: FC<Props> = ({ product, className }) => {
 
       <span className="text-3xl font-light">${product.price}</span>
 
-      <Image className="absolute bottom-0 right-0" src={product.image} alt={product.title} width="350" height="500" />
+      <img className="absolute bottom-0 right-0" src={product.image} alt={product.title} width="350" height="500" />
     </div>
   );
 };

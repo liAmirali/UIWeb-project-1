@@ -1,4 +1,4 @@
-import Image from "next/image";
+
 import { FC } from "react";
 
 const navigationItems = [
@@ -37,8 +37,8 @@ const Navigation: FC = () => {
             {item.label}
 
             {item.children && (
-              <Image
-                src="/icons/huge-icon/arrows/solid/direction-down 01.svg"
+              <img
+                src="/icons/huge-icon/arrows/solid/direction-down 01.svg?react"
                 alt=""
                 width="24"
                 height="24"
@@ -50,17 +50,17 @@ const Navigation: FC = () => {
 
       {/* Categories */}
       <div className="flex items-center bg-gray-500 bg-opacity-5 px-5 p-3 absolute left-0">
-        <Image
+        <img
           className="mr-4"
-          src="/icons/huge-icon/menu/solid/menu-line-horizontal.svg"
+          src="/icons/huge-icon/menu/solid/menu-line-horizontal.svg?react"
           alt=""
           width="24"
           height="24"
         />
         <span>All Categories</span>
-        <Image
+        <img
           className="ml-28"
-          src="/icons/huge-icon/arrows/solid/direction-down 01.svg"
+          src="/icons/huge-icon/arrows/solid/direction-down 01.svg?react"
           alt=""
           width="24"
           height="24"

@@ -1,19 +1,18 @@
 "use client";
 
 import AppSearch from "@/components/common/AppSearch";
-import Image from "next/image";
+
 import { FC, useState } from "react";
 import HeaderUtils from "./HeaderUtils";
 import Button from "@/components/common/Button";
 import LoginModal from "@/components/modals/LoginModal";
-import { usePathname } from "next/navigation";
 import classNames from "@/utils/classNames";
+import { useLocation } from "react-router-dom";
 
 const Header: FC = () => {
   const [showLoginModal, setShowLoginModal] = useState(false);
 
-  const pathname = usePathname();
-  console.log("pathname:", pathname);
+  const { pathname } = useLocation();
 
   return (
     <div className={classNames("px-40 py-10")}>
@@ -21,7 +20,7 @@ const Header: FC = () => {
       <div className="flex justify-between">
         {/* Logo */}
         <div>
-          <Image src="/images/logo/logo.svg" alt="Electro Logo" width="178" height="35" />
+          <img src="/images/logo/logo.svg" alt="Electro Logo" width="178" height="35" />
         </div>
 
         {/* Search Bar */}

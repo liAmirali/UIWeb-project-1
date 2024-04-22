@@ -10,7 +10,7 @@ const AppSearch: FC = () => {
         <Button
           className="rounded-r-none"
           style="white"
-          rightIconUrl="/icons/huge-icon/arrows/solid/direction-down 01.svg"
+          rightIconUrl="/icons/huge-icon/arrows/solid/direction-down 01.svg?react"
         >
           All
         </Button>

@@ -1,7 +1,7 @@
 import { FC } from "react";
 import Input from "../common/Input";
 
-import EmptyStarIcon from "@/public/icons/huge-icon/interface/outline/star.svg";
+import EmptyStarIcon from "@/public/icons/huge-icon/interface/outline/star.svg?react";
 import TextArea from "../common/TextArea";
 import Button from "../common/Button";
 

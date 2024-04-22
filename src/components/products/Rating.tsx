@@ -1,7 +1,7 @@
 import { FC } from "react";
 
-import FilledStarIcon from "@/public/icons/huge-icon/interface/solid/star.svg";
-import EmptyStarIcon from "@/public/icons/huge-icon/interface/outline/star.svg";
+import FilledStarIcon from "@/public/icons/huge-icon/interface/solid/star.svg?react";
+import EmptyStarIcon from "@/public/icons/huge-icon/interface/outline/star.svg?react";
 
 interface Props {
   rating: number;

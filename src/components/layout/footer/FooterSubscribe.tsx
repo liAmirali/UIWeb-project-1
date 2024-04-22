@@ -1,7 +1,7 @@
 import { FC } from "react";
 
-import RightArrowIcon from "@/public/icons/huge-icon/arrows/outline/arrow-right.svg";
-import GmailIcon from "@/public/icons/huge-icon/social/outline/gmail.svg";
+import RightArrowIcon from "@/public/icons/huge-icon/arrows/outline/arrow-right.svg?react";
+import GmailIcon from "@/public/icons/huge-icon/social/outline/gmail.svg?react";
 
 const FooterSubscribe: FC = () => {
   return (

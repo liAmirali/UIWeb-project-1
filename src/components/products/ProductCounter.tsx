@@ -1,8 +1,8 @@
 import { FC } from "react";
 import classNames from "@/utils/classNames";
 
-import MinusIcon from "@/public/icons/huge-icon/interface/outline/minus.svg";
-import PlusIcon from "@/public/icons/huge-icon/interface/outline/plus.svg";
+import MinusIcon from "@/public/icons/huge-icon/interface/outline/minus.svg?react";
+import PlusIcon from "@/public/icons/huge-icon/interface/outline/plus.svg?react";
 
 interface Props {
   className?: string;

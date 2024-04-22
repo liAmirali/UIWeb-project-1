@@ -1,9 +1,7 @@
-import Image from "next/image";
 import { FC } from "react";
 
-import HeadphoneDude from "@/public/images/bg/headphone-dude.png";
 import Button from "../common/Button";
-import Link from "next/link";
+import { Link } from "react-router-dom";
 
 const MainHero: FC = () => {
   return (
@@ -14,7 +12,7 @@ const MainHero: FC = () => {
 
         {/* Headphone guy */}
         <div className="absolute right-16 top-0 bottom-0 overflow-hidden">
-          <Image src={HeadphoneDude} className="h-full" alt="" />
+          <img src={"/images/bg/headphone-dude.png"} className="h-full" alt="" />
         </div>
       </div>
 
@@ -33,7 +31,7 @@ const MainHero: FC = () => {
           <br /> looking at its layout. The point of using Lorem Ipsum.
         </p>
 
-        <Link href="/product">
+        <Link to="/product">
           <Button rightIconUrl="/icons/huge-icon/arrows/solid/arrow-right.svg">Shop Now</Button>
         </Link>
       </div>

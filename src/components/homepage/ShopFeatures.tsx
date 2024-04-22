@@ -1,9 +1,9 @@
 import { FC } from "react";
 
-import FastShippingIcon from "@/public/icons/huge-icon/shipping and delivery/outline/fast delivery.svg";
-import DollarCoinIcon from "@/public/icons/huge-icon/finance and payment/outline/coin-dollar.svg";
-import HeadphoneMicIcon from "@/public/icons/huge-icon/multimedia and audio/outline/headphones-1.svg";
-import CardIcon from "@/public/icons/huge-icon/ecommerce/outline/card.svg";
+import FastShippingIcon from "@/public/icons/huge-icon/shipping and delivery/outline/fast delivery.svg?react";
+import DollarCoinIcon from "@/public/icons/huge-icon/finance and payment/outline/coin-dollar.svg?react";
+import HeadphoneMicIcon from "@/public/icons/huge-icon/multimedia and audio/outline/headphones-1.svg?react";
+import CardIcon from "@/public/icons/huge-icon/ecommerce/outline/card.svg?react";
 
 const ShopFeatures: FC = () => {
   return (

@@ -3,7 +3,7 @@
 import classNames from "@/utils/classNames";
 import { FC, PropsWithChildren, useEffect } from "react";
 
-import XIcon from "@/public/icons/huge-icon/interface/outline/remove.svg";
+import XIcon from "@/public/icons/huge-icon/interface/outline/remove.svg?react";
 
 interface Props extends PropsWithChildren {
   open: boolean;

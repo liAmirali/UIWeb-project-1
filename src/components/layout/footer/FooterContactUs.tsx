@@ -1,17 +1,14 @@
 import { FC } from "react";
 
-import LogoWhite from "@/public/images/logo/logo-white.png";
-
-import CallIcon from "@/public/icons/huge-icon/communication/outline/calling.svg";
-import GmailIcon from "@/public/icons/huge-icon/social/outline/gmail.svg";
-import LocationIcon from "@/public/icons/huge-icon/device/outline/location.svg";
-import Image from "next/image";
+import CallIcon from "@/public/icons/huge-icon/communication/outline/calling.svg?react";
+import GmailIcon from "@/public/icons/huge-icon/social/outline/gmail.svg?react";
+import LocationIcon from "@/public/icons/huge-icon/device/outline/location.svg?react";
 
 const FooterContactUs: FC = () => {
   return (
     <div className="flex flex-col items-start justify-start gap-8">
       <div>
-        <Image src={LogoWhite} alt="" />
+        <img src={"@/images/logo/logo-white.png"} alt="" />
       </div>
 
       <div className="flex-1 flex flex-col items-start justify-start gap-4">

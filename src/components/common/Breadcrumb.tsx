@@ -1,5 +1,5 @@
 import { FC } from "react";
-import RightChevronIcon from "@/public/icons/huge-icon/arrows/outline/direction-right 01.svg";
+import RightChevronIcon from "@/public/icons/huge-icon/arrows/outline/direction-right 01.svg?react";
 
 const Breadcrumb: FC = () => {
   const pages = ["Home", "Shop", "Apple iPhone 14 Pro"];

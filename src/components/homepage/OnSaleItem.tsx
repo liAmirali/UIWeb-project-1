@@ -1,7 +1,6 @@
 import { FC } from "react";
 import Button from "../common/Button";
 import classNames from "@/utils/classNames";
-import Image from "next/image";
 import Badge from "../common/Badge";
 
 interface Props {
@@ -35,7 +34,7 @@ const OnSaleItem: FC<Props> = ({ badge, heading, description, link, image, class
 
       {image && (
         <div className="absolute right-0 bottom-0">
-          <Image src={image} alt={heading} width="235" height="235" />
+          <img src={image} alt={heading} width="235" height="235" />
         </div>
       )}
     </div>

@@ -1,8 +1,8 @@
 import { FC } from "react";
 import Button from "../common/Button";
 
-import RightArrowIcon from "@/public/icons/huge-icon/arrows/solid/arrow-right.svg";
-import LeftArrowIcon from "@/public/icons/huge-icon/arrows/solid/arrow-left.svg";
+import RightArrowIcon from "@/public/icons/huge-icon/arrows/solid/arrow-right.svg?react";
+import LeftArrowIcon from "@/public/icons/huge-icon/arrows/solid/arrow-left.svg?react";
 import CategoryItem from "./CategoryItem";
 
 const categories = [

@@ -1,4 +1,4 @@
-import Image from "next/image";
+
 import { FC } from "react";
 import Rating from "./Rating";
 
@@ -12,7 +12,7 @@ const ReviewItem: FC<Props> = ({ review }) => {
       {/* Author info */}
       <div className="flex gap-x-4">
         <span>
-          <Image src={review.profilePic} alt={review.author} width="50" height="50" />
+          <img src={review.profilePic} alt={review.author} width="50" height="50" />
         </span>
         <span className="flex flex-col">
           <span>{review.author}</span>

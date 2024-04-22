@@ -1,8 +1,8 @@
 import { FC } from "react";
 import Modal from "../common/Modal";
-import Image from "next/image";
 
-import TrashIcon from "@/public/icons/huge-icon/interface/outline/trash.svg";
+
+import TrashIcon from "@/public/icons/huge-icon/interface/outline/trash.svg?react";
 import Button from "../common/Button";
 
 interface Props extends ModalProps {}
@@ -38,7 +38,7 @@ const CartList: FC<Props> = ({ open, setOpen }) => {
           {cart.map((item, i) => (
             <div key={i} className="flex gap-x-2 pt-3 relative">
               <div className="bg-gray-500 bg-opacity-5 p-2">
-                <Image src={item.image} alt={item.title} width="41" height="50" />
+                <img src={item.image} alt={item.title} width="41" height="50" />
               </div>
 
               <div className="flex flex-col gap-y-1">
