@@ -1,7 +1,9 @@
-import { FC, useState } from "react";
+import { FC, Fragment, useEffect, useState } from "react";
 import Input from "../common/Input";
 
 import EmptyStarIcon from "@/public/icons/huge-icon/interface/outline/star.svg?react";
+import FullStarIcon from "@/public/icons/huge-icon/interface/solid/star.svg?react";
+
 import TextArea from "../common/TextArea";
 import Button from "../common/Button";
 import { toast } from "react-toastify";
@@ -15,6 +17,8 @@ const SubmitReviewForm: FC<Props> = ({ onSubmit }) => {
   const [emailInputValue, setEmailInputValue] = useState("");
   const [reviewInputValue, setReviewInputValue] = useState("");
   const [selectedRate, setSelectedRate] = useState(0);
+
+  const [hoveredRating, setHoveredRating] = useState(0);
 
   const handleSubmitClick = () => {
     if (!nameInputValue || !emailInputValue || !reviewInputValue) {
@@ -32,6 +36,10 @@ const SubmitReviewForm: FC<Props> = ({ onSubmit }) => {
     if (onSubmit) onSubmit(formData);
   };
 
+  useEffect(() => {
+    console.log("New selected rate:", selectedRate);
+  }, [selectedRate])
+
   return (
     <div className="py-14 space-y-8">
       <b className="text-2xl">Add your Review</b>
@@ -39,10 +47,22 @@ const SubmitReviewForm: FC<Props> = ({ onSubmit }) => {
       <div className="flex flex-col gap-y-2">
         <span className="text-dark-500">Your Rating</span>
         <div className="flex space-x-2 divide-x text-dark-500">
-          {Array.from(Array(5).keys()).map((numStars) => (
-            <span key={numStars} className="flex pl-2 first:pl-0">
-              {Array.from(Array(numStars + 1).keys()).map((star) => (
-                <EmptyStarIcon key={star} />
+          {Array.from(Array(5).keys()).map((numStarsIndex) => (
+            <span
+              key={numStarsIndex}
+              className="flex pl-2 first:pl-0 cursor-pointer"
+              onMouseOver={() => setHoveredRating(numStarsIndex + 1)}
+              onMouseLeave={() => setHoveredRating(0)}
+              onClick={() => setSelectedRate(numStarsIndex + 1)}
+            >
+              {Array.from(Array(numStarsIndex + 1).keys()).map((star) => (
+                <Fragment key={star}>
+                  {hoveredRating === numStarsIndex + 1 || selectedRate === numStarsIndex + 1 ? (
+                    <FullStarIcon color="#FFC11F" />
+                  ) : (
+                    <EmptyStarIcon />
+                  )}
+                </Fragment>
               ))}
             </span>
           ))}
