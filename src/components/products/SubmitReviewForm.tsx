@@ -26,6 +26,7 @@ const SubmitReviewForm: FC<Props> = ({ onSubmit }) => {
       name: nameInputValue,
       email: emailInputValue,
       review: reviewInputValue,
+      rate: selectedRate,
     };
 
     if (onSubmit) onSubmit(formData);
