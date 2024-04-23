@@ -1,25 +1,35 @@
 import { FC } from "react";
 import Modal from "../common/Modal";
 
-
 import TrashIcon from "@/public/icons/huge-icon/interface/outline/trash.svg?react";
 import Button from "../common/Button";
-import { useAppSelector } from "@/store";
+import { useAppDispatch, useAppSelector } from "@/store";
+import { cartActions } from "@/store/cart";
 
 interface Props extends ModalProps {}
 
 const CartList: FC<Props> = ({ open, setOpen }) => {
+  const dispatch = useAppDispatch();
+
   const cartItems = useAppSelector((state) => state.cart.items);
 
   const handleClose = () => {
     setOpen(false);
-  }
+  };
+
+  const handleRemoveClick = (item: CartItem) => {
+    dispatch(cartActions.removeItem({ id: item.product.id }));
+  };
 
   return (
     <Modal open={open} onClose={handleClose} className="!justify-end items-stretch" noCloseButton>
       <div className="flex-1 flex flex-col bg-white self-stretch float-right py-4 px-6 space-y-8 min-w-[25rem]">
         <span>
-          You have <span className="font-bold">2 items</span> items in your cart
+          You have{" "}
+          <span className="font-bold">
+            {cartItems.length} item{cartItems.length !== 1 ? "s" : ""}
+          </span>{" "}
+          in your cart
         </span>
 
         <div className="space-y-3 divide-y">
@@ -35,7 +45,10 @@ const CartList: FC<Props> = ({ open, setOpen }) => {
                 <span>QTY: {item.quantity}</span>
               </div>
 
-              <span className="text-red-500 absolute right-0 bottom-0">
+              <span
+                className="text-red-500 absolute right-0 bottom-0"
+                onClick={() => handleRemoveClick(item)}
+              >
                 <TrashIcon />
               </span>
             </div>
@@ -45,7 +58,14 @@ const CartList: FC<Props> = ({ open, setOpen }) => {
         <div className="space-y-6 !mt-auto">
           <div className="flex justify-between font-bold">
             <span>Subtotal</span>
-            <span>$2249.00</span>
+            <span>
+              $
+              {cartItems
+                .reduce((a, b) => {
+                  return a + b.product.price * b.quantity;
+                }, 0)
+                .toFixed(2)}
+            </span>
           </div>
 
           <div className="flex flex-col gap-y-2">

@@ -31,7 +31,7 @@ const slice = createSlice({
   reducers: {
     increaseQuantity: (
       state,
-      action: PayloadAction<{ id: string, product?: ProductItemT; quantity?: number }>
+      action: PayloadAction<{ id: string; product?: ProductItemT; quantity?: number }>
     ) => {
       const { id: productId, product, quantity } = action.payload;
 
@@ -53,7 +53,17 @@ const slice = createSlice({
         state.totalQuantity += 1;
       }
     },
+
+    removeItem: (state, action: PayloadAction<{ id: string }>) => {
+      const { id: productId } = action.payload;
+
+      state.items = state.items.filter((item) => item.product.id !== productId);
+      state.totalQuantity = state.items.reduce((a, b) => {
+        return a + b.quantity
+      }, 0);
+    },
   },
+
   initialState,
 });
 
