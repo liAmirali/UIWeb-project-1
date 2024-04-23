@@ -1,3 +1,8 @@
+type ColorT = {
+  colorHex: string;
+  price: number;
+};
+
 type ProductItemT = {
   title: string;
   price: number;

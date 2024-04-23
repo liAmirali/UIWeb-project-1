@@ -1,15 +1,29 @@
+import classNames from "@/utils/classNames";
 import { FC } from "react";
 
-const ProductColors: FC = () => {
+interface Props {
+  colors: ColorT[];
+  selectedColor: ColorT;
+  onColorChange: (color: ColorT) => void;
+}
+
+const ProductColors: FC<Props> = ({ colors, selectedColor, onColorChange }) => {
   return (
     <div>
       <b>Color</b>
 
       <div className="flex gap-x-2">
-        <span className="rounded-lg size-9 bg-[#BEBEC6]"></span>
-        <span className="rounded-lg size-9 bg-[#304FBE]"></span>
-        <span className="rounded-lg size-9 bg-[#101316]"></span>
-        <span className="rounded-lg size-9 bg-[#5D30BE]"></span>
+        {colors.map((c) => (
+          <span
+            key={selectedColor.colorHex}
+            onClick={() => onColorChange(c)}
+            className={classNames(
+              `rounded-lg size-9`,
+              selectedColor.colorHex === c.colorHex && "border-2 border-primary-600"
+            )}
+            style={{ backgroundColor: c.colorHex }}
+          ></span>
+        ))}
       </div>
     </div>
   );

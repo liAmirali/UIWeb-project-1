@@ -1,4 +1,4 @@
-import { FC } from "react";
+import { FC, useState } from "react";
 import ProductImages from "./ProductImages";
 import Badge from "../common/Badge";
 import Rating from "./Rating";
@@ -8,7 +8,32 @@ import FavoriteIcon from "@/public/icons/huge-icon/ecommerce/outline/favourite.s
 import Button from "../common/Button";
 import ProductCounter from "./ProductCounter";
 
+const colors: ColorT[] = [
+  {
+    colorHex: "#BEBEC6",
+    price: 100,
+  },
+  {
+    colorHex: "#304FBE",
+    price: 200,
+  },
+  {
+    colorHex: "#101316",
+    price: 300,
+  },
+  {
+    colorHex: "#5D30BE",
+    price: 400,
+  },
+];
+
 const ProductDetails: FC = () => {
+  const [selectedColor, setSelectedColor] = useState(colors[0]);
+
+  const handleColorChange = (color: ColorT) => {
+    setSelectedColor(color);
+  };
+
   return (
     <div className="flex flex-row-reverse gap-x-6">
       <div className="space-y-8 flex-1">
@@ -22,7 +47,7 @@ const ProductDetails: FC = () => {
           <span className="text-gray-500 text-sm">{"5.0 (121 Reviews)"}</span>
         </div>
 
-        <div className="text-lg">{"$1999.00"}</div>
+        <div className="text-lg">${(1999 + selectedColor.price).toFixed(2)}</div>
 
         <p>
           It is a long established fact that a reader will be distracted by the readable content of
@@ -30,7 +55,11 @@ const ProductDetails: FC = () => {
           more-or-less normal distribution.
         </p>
 
-        <ProductColors />
+        <ProductColors
+          colors={colors}
+          selectedColor={selectedColor}
+          onColorChange={handleColorChange}
+        />
 
         <div className="flex items-center justify-between gap-x-8">
           <ProductCounter className="w-32 self-stretch" />
