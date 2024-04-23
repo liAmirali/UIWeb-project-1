@@ -4,24 +4,12 @@ import Modal from "../common/Modal";
 
 import TrashIcon from "@/public/icons/huge-icon/interface/outline/trash.svg?react";
 import Button from "../common/Button";
+import { useAppSelector } from "@/store/inedx";
 
 interface Props extends ModalProps {}
 
 const CartList: FC<Props> = ({ open, setOpen }) => {
-  const cart = [
-    {
-      title: "Apple iPhone 14 Pro",
-      price: 1999,
-      image: "/images/products/iphone/iphone-small.png",
-      quantity: 1,
-    },
-    {
-      title: "Asus ROG Delta S",
-      price: 250,
-      image: "/images/products/top-selling/image 25.png",
-      quantity: 1,
-    },
-  ];
+  const cartItems = useAppSelector((state) => state.cart.items);
 
   const handleClose = () => {
     setOpen(false);
@@ -35,15 +23,15 @@ const CartList: FC<Props> = ({ open, setOpen }) => {
         </span>
 
         <div className="space-y-3 divide-y">
-          {cart.map((item, i) => (
+          {cartItems.map((item, i) => (
             <div key={i} className="flex gap-x-2 pt-3 relative">
               <div className="bg-gray-500 bg-opacity-5 p-2">
-                <img src={item.image} alt={item.title} width="41" height="50" />
+                <img src={item.product.image} alt={item.product.title} width="41" height="50" />
               </div>
 
               <div className="flex flex-col gap-y-1">
-                <span className="text-dark-500">{item.title}</span>
-                <span className="font-bold">${item.price.toFixed(2)}</span>
+                <span className="text-dark-500">{item.product.title}</span>
+                <span className="font-bold">${item.product.price.toFixed(2)}</span>
                 <span>QTY: {item.quantity}</span>
               </div>
 

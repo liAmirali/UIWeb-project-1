@@ -1,3 +1,15 @@
+type CartItem = {
+  product: ProductT;
+  quantity: number;
+};
+
+type ProductT = {
+  id: string;
+  title: string;
+  image: string;
+  price: number;
+};
+
 type ColorT = {
   colorHex: string;
   price: number;
