@@ -1,5 +1,3 @@
-"use client";
-
 import { FC, useState } from "react";
 import Modal from "../common/Modal";
 import Card from "../common/Card";

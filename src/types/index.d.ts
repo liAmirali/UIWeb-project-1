@@ -1,13 +1,6 @@
 type CartItem = {
-  product: ProductT;
+  product: ProductItemT;
   quantity: number;
-};
-
-type ProductT = {
-  id: string;
-  title: string;
-  image: string;
-  price: number;
 };
 
 type ColorT = {
@@ -16,6 +9,7 @@ type ColorT = {
 };
 
 type ProductItemT = {
+  id: string;
   title: string;
   price: number;
   rating: number;

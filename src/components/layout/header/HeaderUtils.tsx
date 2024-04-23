@@ -1,8 +1,10 @@
 import CartList from "@/components/products/CartList";
+import { useAppSelector } from "@/store";
 
 import { FC, useState } from "react";
 
 const HeaderUtils: FC = () => {
+  const totalCartQuantity = useAppSelector((state) => state.cart.totalQuantity);
   const [showCart, setShowCart] = useState(false);
 
   return (
@@ -26,7 +28,7 @@ const HeaderUtils: FC = () => {
       >
         <img src="/icons/huge-icon/ecommerce/outline/cart.svg" alt="" width="24" height="24" />
         <div className="size-4 absolute -top-2 -right-2 rounded-full bg-primary-500 z-[1] flex items-center justify-center p-2.5">
-          <span className="font-bold text-white text-sm">2</span>
+          <span className="font-bold text-white text-sm">{totalCartQuantity}</span>
         </div>
       </div>
 

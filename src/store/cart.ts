@@ -8,6 +8,7 @@ const initialState: CartSliceState = {
         title: "Apple iPhone 14 Pro",
         price: 1999,
         image: "/images/products/iphone/iphone-small.png",
+        rating: 4,
       },
       quantity: 1,
     },
@@ -17,6 +18,7 @@ const initialState: CartSliceState = {
         title: "Asus ROG Delta S",
         price: 250,
         image: "/images/products/top-selling/image 25.png",
+        rating: 5,
       },
       quantity: 1,
     },
@@ -27,13 +29,28 @@ const initialState: CartSliceState = {
 const slice = createSlice({
   name: "cart",
   reducers: {
-    increaseQuantity: (state, action: PayloadAction<{ id: string; quantity?: number }>) => {
+    increaseQuantity: (
+      state,
+      action: PayloadAction<{ id: string, product?: ProductItemT; quantity?: number }>
+    ) => {
+      const { id: productId, product, quantity } = action.payload;
+
+      let found = false;
       for (const item of state.items) {
-        if (item.product.id === action.payload.id) {
-          item.quantity += action.payload.quantity || 1;
-          state.totalQuantity += action.payload.quantity || 1;
+        if (item.product.id === productId) {
+          item.quantity += quantity || 1;
+          state.totalQuantity += quantity || 1;
+          found = true;
           break;
         }
+      }
+
+      if (!found && !!product) {
+        state.items.push({
+          product: product,
+          quantity: 1,
+        });
+        state.totalQuantity += 1;
       }
     },
   },

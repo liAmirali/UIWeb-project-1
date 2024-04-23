@@ -4,7 +4,7 @@ import Modal from "../common/Modal";
 
 import TrashIcon from "@/public/icons/huge-icon/interface/outline/trash.svg?react";
 import Button from "../common/Button";
-import { useAppSelector } from "@/store/inedx";
+import { useAppSelector } from "@/store";
 
 interface Props extends ModalProps {}
 

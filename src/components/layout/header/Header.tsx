@@ -1,5 +1,3 @@
-"use client";
-
 import AppSearch from "@/components/common/AppSearch";
 
 import { FC, useState } from "react";
@@ -7,12 +5,9 @@ import HeaderUtils from "./HeaderUtils";
 import Button from "@/components/common/Button";
 import LoginModal from "@/components/modals/LoginModal";
 import classNames from "@/utils/classNames";
-import { useLocation } from "react-router-dom";
 
 const Header: FC = () => {
   const [showLoginModal, setShowLoginModal] = useState(false);
-
-  const { pathname } = useLocation();
 
   return (
     <div className={classNames("px-40 py-10")}>

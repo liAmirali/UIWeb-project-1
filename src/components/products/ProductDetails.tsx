@@ -7,6 +7,8 @@ import ProductColors from "./ProductColors";
 import FavoriteIcon from "@/public/icons/huge-icon/ecommerce/outline/favourite.svg?react";
 import Button from "../common/Button";
 import ProductCounter from "./ProductCounter";
+import { useAppDispatch } from "@/store";
+import { cartActions } from "@/store/cart";
 
 const colors: ColorT[] = [
   {
@@ -28,10 +30,30 @@ const colors: ColorT[] = [
 ];
 
 const ProductDetails: FC = () => {
+  const dispatch = useAppDispatch();
+
   const [selectedColor, setSelectedColor] = useState(colors[0]);
+
+  const [quantityCounter, setQuantityCounter] = useState(1);
 
   const handleColorChange = (color: ColorT) => {
     setSelectedColor(color);
+  };
+
+  const handleAddToCartClick = () => {
+    dispatch(
+      cartActions.increaseQuantity({
+        id: "1",
+        product: {
+          id: "1",
+          title: "Apple iPhone 14 Pro",
+          price: 1999,
+          image: "/images/products/iphone/iphone-small.png",
+          rating: 4,
+        },
+        quantity: quantityCounter,
+      })
+    );
   };
 
   return (
@@ -62,9 +84,16 @@ const ProductDetails: FC = () => {
         />
 
         <div className="flex items-center justify-between gap-x-8">
-          <ProductCounter className="w-32 self-stretch" />
+          <ProductCounter
+            className="w-32 self-stretch"
+            count={quantityCounter}
+            onIncrease={() => setQuantityCounter((prev) => prev + 1)}
+            onDecrease={() => setQuantityCounter((prev) => (prev > 1 ? prev - 1 : 1))}
+          />
 
-          <Button className="flex-1">Add to Cart</Button>
+          <Button className="flex-1" onClick={handleAddToCartClick}>
+            Add to Cart
+          </Button>
 
           <FavoriteIcon />
         </div>
