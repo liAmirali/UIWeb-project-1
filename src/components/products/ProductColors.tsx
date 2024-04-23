@@ -15,7 +15,7 @@ const ProductColors: FC<Props> = ({ colors, selectedColor, onColorChange }) => {
       <div className="flex gap-x-2">
         {colors.map((c) => (
           <span
-            key={selectedColor.colorHex}
+            key={c.colorHex}
             onClick={() => onColorChange(c)}
             className={classNames(
               `rounded-lg size-9`,

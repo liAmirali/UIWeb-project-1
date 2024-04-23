@@ -3,6 +3,9 @@ import RootLayout from "./app/layout";
 import Home from "./app/page";
 import ProductPage from "./app/product/page";
 
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+
 function App() {
   const router = createBrowserRouter([
     {
@@ -21,7 +24,12 @@ function App() {
     },
   ]);
 
-  return <RouterProvider router={router} />;
+  return (
+    <>
+      <RouterProvider router={router} />
+      <ToastContainer />
+    </>
+  );
 }
 
 export default App;
