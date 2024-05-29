@@ -27,7 +27,7 @@ const OnSaleItem: FC<Props> = ({ badge, heading, description, link, image, class
       {description && <p>{description}</p>}
 
       {link && (
-        <Button rightIconUrl="/icons/huge-icon/arrows/solid/arrow-right.svg" className="mt-6">
+        <Button rightIconUrl="/icons/huge-icon/arrows/solid/arrow-right-white.svg" className="mt-6">
           Shop Now
         </Button>
       )}

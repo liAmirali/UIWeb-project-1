@@ -1,6 +1,5 @@
 import classNames from "@/utils/classNames";
 import { FC, PropsWithChildren, Suspense } from "react";
-import DynamicSvg from "../icons/DynamicSvg";
 
 interface Props extends PropsWithChildren {
   size?: "xl" | "lg" | "md" | "sm";
@@ -48,7 +47,7 @@ const Button: FC<Props> = ({
     >
       {leftIconUrl && (
         <Suspense fallback={<>Loading...</>}>
-          <DynamicSvg path={leftIconUrl} />
+          <img src={leftIconUrl} />
         </Suspense>
       )}
 
@@ -67,7 +66,7 @@ const Button: FC<Props> = ({
 
       {rightIconUrl && (
         <Suspense fallback={<>Loading...</>}>
-          <DynamicSvg path={rightIconUrl} />
+          <img src={rightIconUrl} />
         </Suspense>
       )}
     </button>

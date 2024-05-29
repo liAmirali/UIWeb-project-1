@@ -32,7 +32,7 @@ const MainHero: FC = () => {
         </p>
 
         <Link to="/product">
-          <Button rightIconUrl="/icons/huge-icon/arrows/solid/arrow-right.svg">Shop Now</Button>
+          <Button rightIconUrl="/icons/huge-icon/arrows/solid/arrow-right-white.svg">Shop Now</Button>
         </Link>
       </div>
     </div>

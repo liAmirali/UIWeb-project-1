@@ -34,7 +34,7 @@ const CoverCallToAction: FC<Props> = ({
 
       {description && <span className="text-lg">{description}</span>}
 
-      <Button rightIconUrl="/icons/huge-icon/arrows/solid/arrow-right.svg">{buttonLabel}</Button>
+      <Button rightIconUrl="/icons/huge-icon/arrows/solid/arrow-right-white.svg">{buttonLabel}</Button>
     </div>
   );
 };
