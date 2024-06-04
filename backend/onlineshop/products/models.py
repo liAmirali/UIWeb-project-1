@@ -48,6 +48,9 @@ class ProductPriceHistory(models.Model):
                                 MinValueValidator(0)])
     product = models.ForeignKey(
         Product, on_delete=models.CASCADE, related_name="prices")
+    
+    class Meta():
+        verbose_name_plural = "Product prices history"
 
 
 class Color (models.Model):
@@ -61,3 +64,6 @@ class Color (models.Model):
 class Category(models.Model):
     name = models.CharField(max_length=200)
     subcategories = models.ForeignKey('Category', on_delete=models.CASCADE)
+
+    class Meta():
+        verbose_name_plural = "categories"
