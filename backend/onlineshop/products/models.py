@@ -157,7 +157,7 @@ class Color (models.Model):
 class Category(models.Model):
     name = models.CharField(max_length=200)
     parent_category = models.ForeignKey(
-        'Category', on_delete=models.CASCADE, related_name='subcategories', default=None)
+        'Category', on_delete=models.CASCADE, related_name='subcategories', default=None, null=True, blank=True)
 
     class Meta():
         verbose_name_plural = "categories"
