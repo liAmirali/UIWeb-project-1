@@ -6,7 +6,7 @@ from user.models import User
 
 class Cart(models.Model):
     discount = models.ForeignKey(
-        'Discount', on_delete=models.SET_NULL, null=True)
+        'Discount', on_delete=models.SET_NULL, null=True, blank=True)
 
 
 class CartItem(models.Model):
