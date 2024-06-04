@@ -2,10 +2,16 @@ from django.db import models
 from django.core.validators import MinValueValidator, MaxValueValidator
 from django.core.exceptions import ValidationError
 
+from user.models import User
+
 
 class Cart(models.Model):
     discount = models.ForeignKey(
         'Discount', on_delete=models.SET_NULL, null=True, blank=True)
+
+    user = models.OneToOneField(
+        User, on_delete=models.CASCADE, related_name='cart'
+    )
 
     def __str__(self) -> str:
         return f"{self.user}'s cart"
@@ -50,7 +56,7 @@ class CartItem(models.Model):
         Cart, on_delete=models.CASCADE, related_name='cart_items')
     quantity = models.IntegerField(validators=[MinValueValidator(0)])
     product = models.ForeignKey('Product', on_delete=models.CASCADE)
-    color = models.ForeignKey('Color', on_delete=models.SET_NULL)
+    color = models.ForeignKey('Color', on_delete=models.CASCADE)
 
     def clean(self):
         # Check if the color is among the product's colors
@@ -151,7 +157,7 @@ class Color (models.Model):
 class Category(models.Model):
     name = models.CharField(max_length=200)
     parent_category = models.ForeignKey(
-        'Category', on_delete=models.CASCADE, related_name='subcategories')
+        'Category', on_delete=models.CASCADE, related_name='subcategories', default=None)
 
     class Meta():
         verbose_name_plural = "categories"
