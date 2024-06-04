@@ -56,9 +56,14 @@ class CartItem(models.Model):
         Cart, on_delete=models.CASCADE, related_name='cart_items')
     quantity = models.IntegerField(validators=[MinValueValidator(0)])
     product = models.ForeignKey('Product', on_delete=models.CASCADE)
-    color = models.ForeignKey('Color', on_delete=models.CASCADE)
+    color = models.ForeignKey(
+        'Color', on_delete=models.CASCADE, null=True, blank=True)
 
     def clean(self):
+        # If product has not colors, just ignore
+        if not self.product.colors.all():
+            return
+            
         # Check if the color is among the product's colors
         if self.color not in self.product.colors.all():
             raise ValidationError({
@@ -94,8 +99,10 @@ class Discount(models.Model):
     max_price_limit = models.FloatField(
         validators=[MinValueValidator(0)], null=True)
 
-    applicable_products = models.ManyToManyField('Product')
-    applicable_categories = models.ManyToManyField('Category')
+    applicable_products = models.ManyToManyField(
+        'Product', blank=True)
+    applicable_categories = models.ManyToManyField(
+        'Category', blank=True)
 
     def __str__(self) -> str:
         return f"Discount {self.code}"
