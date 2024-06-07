@@ -1,6 +1,9 @@
+
 from django.db import models
 from django.core.validators import MinValueValidator, MaxValueValidator
 from django.core.exceptions import ValidationError
+
+from decimal import Decimal
 
 from user.models import User
 
@@ -17,7 +20,7 @@ class Cart(models.Model):
         return f"{self.user}'s cart"
 
     def get_total_cost(self):
-        total_cost = 0
+        total_cost = Decimal(0)
         cart_items = self.cart_items.all()
         for item in cart_items:
             item: CartItem = item
@@ -28,7 +31,7 @@ class Cart(models.Model):
     def get_discount_value(self):
         discount: Discount = self.discount
 
-        applicable_products_cost = 0
+        applicable_products_cost = Decimal(0)
         cart_items = self.cart_items.all()
         for item in cart_items:
             item: CartItem = item
@@ -62,10 +65,29 @@ class CartItem(models.Model):
         'Color', on_delete=models.CASCADE, null=True, blank=True)
 
     def clean(self):
-        # If product has not colors, just ignore
-        if not self.product.colors.all():
+        if self.color is None and not self.product.colors.all():
             return
-            
+
+        # If product has colors, but nothing is selected
+        if self.color is None and self.product.colors.all():
+            raise ValidationError({
+                'color': ValidationError(
+                    'Must select a color for this product.',
+                    code='invalid'
+                ),
+            })
+        
+        # If product doesn't have colors, but user has selected something
+        if self.color is not None and not self.product.colors.all():
+            raise ValidationError({
+                'color': ValidationError(
+                    "Can't select a color for this product.",
+                    code='invalid'
+                ),
+            })
+
+        print(self.color not in self.product.colors.all())
+
         # Check if the color is among the product's colors
         if self.color not in self.product.colors.all():
             raise ValidationError({
@@ -82,7 +104,7 @@ class CartItem(models.Model):
         base_price = self.product.get_latest_price()
         if base_price is None:
             base_price = 0
-        extra_cost = 0
+        extra_cost = Decimal(0)
 
         if self.color:
             color: Color = self.color
@@ -99,9 +121,10 @@ class Discount(models.Model):
     code = models.CharField(max_length=8)
     type = models.CharField(
         max_length=10, choices=DiscountType, default=DiscountType.VALUE)
-    value = models.FloatField()
-    max_price_limit = models.FloatField(
-        validators=[MinValueValidator(0)], null=True)
+    value = models.DecimalField(
+        max_digits=10, decimal_places=2, validators=[MinValueValidator(0)])
+    max_price_limit = models.DecimalField(max_digits=10, decimal_places=2, validators=[
+        MinValueValidator(0)], null=True)
 
     applicable_products = models.ManyToManyField(
         'Product', blank=True)
@@ -115,7 +138,7 @@ class Discount(models.Model):
         if self.applicable_products.contains(product):
             return True
 
-        for category in self.applicable_categories:
+        for category in self.applicable_categories.all():
             category: Category = category
 
             if category.is_inside_category(product.category):
@@ -132,7 +155,7 @@ class Product(models.Model):
     category = models.ForeignKey(
         'Category', on_delete=models.SET_NULL, default=None, null=True, blank=True)
 
-    def get_latest_price(self) -> float | None:
+    def get_latest_price(self) -> Decimal | None:
         latest_price_entry = self.prices.order_by('-date').first()
         return latest_price_entry.price if latest_price_entry else None
 
@@ -183,8 +206,8 @@ class Category(models.Model):
         if not self.subcategories:
             return False
 
-        for subcategory in self.subcategories:
-            if subcategory.is_inside_category():
+        for subcategory in self.subcategories.all():
+            if subcategory.is_inside_category(cat):
                 return True
 
         return False
