@@ -18,9 +18,10 @@ class Cart(models.Model):
 
     def get_total_cost(self):
         total_cost = 0
-        for item in self.cart_items:
-            cart_item: CartItem = item
-            total_cost += cart_item.get_price()
+        cart_items = self.cart_items.all()
+        for item in cart_items:
+            item: CartItem = item
+            total_cost += item.get_price()
 
         return total_cost
 
@@ -28,7 +29,8 @@ class Cart(models.Model):
         discount: Discount = self.discount
 
         applicable_products_cost = 0
-        for item in self.cart_items:
+        cart_items = self.cart_items.all()
+        for item in cart_items:
             item: CartItem = item
 
             if discount.is_product_applicable(item.product):
@@ -78,6 +80,8 @@ class CartItem(models.Model):
 
     def get_price(self):
         base_price = self.product.get_latest_price()
+        if base_price is None:
+            base_price = 0
         extra_cost = 0
 
         if self.color:
@@ -128,7 +132,7 @@ class Product(models.Model):
     category = models.ForeignKey(
         'Category', on_delete=models.SET_NULL, default=None, null=True, blank=True)
 
-    def get_latest_price(self):
+    def get_latest_price(self) -> float | None:
         latest_price_entry = self.prices.order_by('-date').first()
         return latest_price_entry.price if latest_price_entry else None
 
