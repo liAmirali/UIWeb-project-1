@@ -20,6 +20,6 @@ from rest_framework.routers import DefaultRouter
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('store/', include("products.urls")),
+    path('store/', include("store.urls")),
     path('api-auth/', include('rest_framework.urls'))
 ]
