@@ -1,8 +1,5 @@
-from django.urls import path
-from store import views as store_views
+from django.urls import path, include
 
 urlpatterns = [
-    path("products", store_views.ProductListView.as_view({'get': 'list'})),
-    path("products/<id>",
-         store_views.ProductListView.as_view({'get': 'retrieve'}))
+    path("store/", include("store.urls"))
 ]
