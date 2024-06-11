@@ -4,6 +4,7 @@ from .models import Cart, CartItem, Category, Color, Product, ProductPriceHistor
 
 class CartItemInline(admin.TabularInline):
     model = CartItem
+    fields = ('product', 'quantity', 'color')
     extra = 1
 
 
