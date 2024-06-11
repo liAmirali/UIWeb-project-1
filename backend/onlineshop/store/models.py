@@ -31,6 +31,9 @@ class Cart(models.Model):
     def get_discount_value(self):
         discount: Discount = self.discount
 
+        if discount is None:
+            return None
+
         applicable_products_cost = Decimal(0)
         cart_items = self.cart_items.all()
         for item in cart_items:
@@ -53,7 +56,10 @@ class Cart(models.Model):
                 return discount_value_to_apply
 
     def get_net_price(self):
-        return self.get_total_cost() - self.get_discount_value()
+        total_cost = self.get_total_cost()
+        discount_value = self.get_discount_value() or 0
+        net = total_cost - discount_value
+        return net
 
 
 class CartItem(models.Model):
@@ -76,7 +82,7 @@ class CartItem(models.Model):
                     code='invalid'
                 ),
             })
-        
+
         # If product doesn't have colors, but user has selected something
         if self.color is not None and not self.product.colors.all():
             raise ValidationError({
