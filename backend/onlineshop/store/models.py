@@ -184,7 +184,7 @@ class ProductPriceHistory(models.Model):
         return f"{self.product} priced {self.price} on {self.date}"
 
 
-class Color (models.Model):
+class Color(models.Model):
     name = models.CharField(max_length=50)
     hex_code = models.CharField(max_length=7)
     extra_cost = models.DecimalField(max_digits=10, decimal_places=2)
