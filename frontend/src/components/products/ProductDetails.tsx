@@ -29,7 +29,11 @@ const colors: ColorT[] = [
   },
 ];
 
-const ProductDetails: FC = () => {
+interface Props {
+  product: ProductT;
+}
+
+const ProductDetails: FC<Props> = ({ product }) => {
   const dispatch = useAppDispatch();
 
   const [selectedColor, setSelectedColor] = useState(colors[0]);
@@ -43,14 +47,8 @@ const ProductDetails: FC = () => {
   const handleAddToCartClick = () => {
     dispatch(
       cartActions.increaseQuantity({
-        id: "1",
-        product: {
-          id: "1",
-          title: "Apple iPhone 14 Pro",
-          price: 1999,
-          image: "/images/products/iphone/iphone-small.png",
-          rating: 4,
-        },
+        id: product.id,
+        product: product,
         quantity: quantityCounter,
       })
     );
@@ -60,22 +58,18 @@ const ProductDetails: FC = () => {
     <div className="flex flex-row-reverse gap-x-6">
       <div className="space-y-8 flex-1">
         <div className="flex justify-between">
-          <b className="text-4xl">Apple iPhone 14 Pro</b>
+          <b className="text-4xl">{product.title}</b>
           <Badge text="In Stock" color="success" />
         </div>
 
         <div className="flex gap-x-4 items-center">
-          <Rating rating={5} />
-          <span className="text-gray-500 text-sm">{"5.0 (121 Reviews)"}</span>
+          <Rating rating={product.rating} />
+          <span className="text-gray-500 text-sm">{`${product.rating} (121 Reviews)`}</span>
         </div>
 
-        <div className="text-lg">${(1999 + selectedColor.price).toFixed(2)}</div>
+        <div className="text-lg">${(product.price + selectedColor.price).toFixed(2)}</div>
 
-        <p>
-          It is a long established fact that a reader will be distracted by the readable content of
-          a page when looking at its layout. The point of using Lorem Ipsum is that it has a
-          more-or-less normal distribution.
-        </p>
+        <p>{product.description}</p>
 
         <ProductColors
           colors={colors}

@@ -3,7 +3,7 @@ import Rating from "../products/Rating";
 
 
 interface Props {
-  product: ProductItemT;
+  product: ProductT;
 }
 
 const ProductItem: FC<Props> = ({ product }) => {

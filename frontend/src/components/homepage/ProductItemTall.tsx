@@ -3,7 +3,7 @@ import classNames from "@/utils/classNames";
 import { FC } from "react";
 
 interface Props {
-  product: ProductItemT;
+  product: ProductT;
   className?: string;
 }
 

@@ -31,7 +31,7 @@ const slice = createSlice({
   reducers: {
     increaseQuantity: (
       state,
-      action: PayloadAction<{ id: string; product?: ProductItemT; quantity?: number }>
+      action: PayloadAction<{ id: string; product?: ProductT; quantity?: number }>
     ) => {
       const { id: productId, product, quantity } = action.payload;
 

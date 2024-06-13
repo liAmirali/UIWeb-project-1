@@ -4,7 +4,7 @@ import ProductItemTall from "./ProductItemTall";
 
 interface Props {
   heading: string;
-  products: ProductItemT[];
+  products: ProductT[];
 }
 
 const ProductGrid: FC<Props> = ({ heading, products }) => {

@@ -2,7 +2,7 @@ import { FC } from "react";
 import ProductItem from "../homepage/ProductItem";
 
 const RelatedProducts: FC = () => {
-  const products: ProductItemT[] = [
+  const products: ProductT[] = [
     {
       title: "Apple iPhone 14 Plus",
       price: 850,
