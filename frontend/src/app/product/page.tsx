@@ -34,7 +34,7 @@ const ProductPage: FC = () => {
 
         setProductDetailsRes({
           isLoading: false,
-          data: res.data,
+          data: res,
           error: null,
         });
       } catch (error) {
@@ -51,13 +51,6 @@ const ProductPage: FC = () => {
     fetchProduct();
   }, [productId]);
 
-  const product = {
-    title: "Apple iPhone 14 Plus",
-    price: 850,
-    image: "/images/products/best-sellers/image 22.png",
-    rating: 5,
-  };
-
   return (
     <div className="px-40 py-20 space-y-8">
       <Breadcrumb />
@@ -67,7 +60,7 @@ const ProductPage: FC = () => {
       ) : productDetailsRes.data ? (
         <ProductDetails product={productDetailsRes.data} />
       ) : productDetailsRes.error ? (
-        <p>{productDetailsRes.error}</p>
+        <p className="text-red-600">{productDetailsRes.error}</p>
       ) : null}
 
       <ProductInfo />

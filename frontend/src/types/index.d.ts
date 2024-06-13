@@ -4,8 +4,10 @@ type CartItem = {
 };
 
 type ColorT = {
-  colorHex: string;
-  price: number;
+  id: number;
+  name: string;
+  hex_code: string;
+  extra_cost: number;
 };
 
 type ProductT = {
@@ -15,6 +17,7 @@ type ProductT = {
   price: number;
   rating: number;
   image: string;
+  colors: ColorT[] | null;
 };
 
 type ReviewItemT = {

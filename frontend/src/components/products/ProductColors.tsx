@@ -15,13 +15,13 @@ const ProductColors: FC<Props> = ({ colors, selectedColor, onColorChange }) => {
       <div className="flex gap-x-2">
         {colors.map((c) => (
           <span
-            key={c.colorHex}
+            key={c.id}
             onClick={() => onColorChange(c)}
             className={classNames(
               `rounded-lg size-9`,
-              selectedColor.colorHex === c.colorHex && "border-2 border-primary-600"
+              selectedColor.hex_code === c.hex_code && "border-2 border-primary-600"
             )}
-            style={{ backgroundColor: c.colorHex }}
+            style={{ backgroundColor: c.hex_code }}
           ></span>
         ))}
       </div>

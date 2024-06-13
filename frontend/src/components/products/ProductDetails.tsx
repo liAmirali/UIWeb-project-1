@@ -10,25 +10,6 @@ import ProductCounter from "./ProductCounter";
 import { useAppDispatch } from "@/store";
 import { cartActions } from "@/store/cart";
 
-const colors: ColorT[] = [
-  {
-    colorHex: "#BEBEC6",
-    price: 100,
-  },
-  {
-    colorHex: "#304FBE",
-    price: 200,
-  },
-  {
-    colorHex: "#101316",
-    price: 300,
-  },
-  {
-    colorHex: "#5D30BE",
-    price: 400,
-  },
-];
-
 interface Props {
   product: ProductT;
 }
@@ -36,7 +17,9 @@ interface Props {
 const ProductDetails: FC<Props> = ({ product }) => {
   const dispatch = useAppDispatch();
 
-  const [selectedColor, setSelectedColor] = useState(colors[0]);
+  const [selectedColor, setSelectedColor] = useState(
+    product.colors && product.colors.length > 0 ? product.colors[0] : null
+  );
 
   const [quantityCounter, setQuantityCounter] = useState(1);
 
@@ -67,15 +50,19 @@ const ProductDetails: FC<Props> = ({ product }) => {
           <span className="text-gray-500 text-sm">{`${product.rating} (121 Reviews)`}</span>
         </div>
 
-        <div className="text-lg">${(product.price + selectedColor.price).toFixed(2)}</div>
+        <div className="text-lg">
+          ${(+product.price + (selectedColor?.extra_cost || 0)).toFixed(2)}
+        </div>
 
         <p>{product.description}</p>
 
-        <ProductColors
-          colors={colors}
-          selectedColor={selectedColor}
-          onColorChange={handleColorChange}
-        />
+        {product.colors && (
+          <ProductColors
+            colors={product.colors}
+            selectedColor={selectedColor!}
+            onColorChange={handleColorChange}
+          />
+        )}
 
         <div className="flex items-center justify-between gap-x-8">
           <ProductCounter
