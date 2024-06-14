@@ -35,3 +35,63 @@ export async function postSingUpInfo(data: {
     throw error;
   }
 }
+
+export async function incrementCartItem(data: { cart_item_id: string; quantity: number }) {
+  try {
+    const response = await fetcher.post(`/store/cart/add`, data);
+    return response.data;
+  } catch (error) {
+    console.error("Error adding to cart:", error);
+    throw error;
+  }
+}
+
+export async function decrementCartItem(data: { cart_item_id: string; quantity: number }) {
+  try {
+    const response = await fetcher.post(`/store/cart/remove`, data);
+    return response.data;
+  } catch (error) {
+    console.error("Error adding to cart:", error);
+    throw error;
+  }
+}
+
+export async function clearCart() {
+  try {
+    const response = await fetcher.post(`/store/cart/clear`);
+    return response.data;
+  } catch (error) {
+    console.error("Error adding to cart:", error);
+    throw error;
+  }
+}
+
+export async function addProductToCart(data: { product_id: number; color: number | null }) {
+  try {
+    const response = await fetcher.post(`/store/cart/add-product`, data);
+    return response.data;
+  } catch (error) {
+    console.error("Error adding product to cart:", error);
+    throw error;
+  }
+}
+
+export async function getCartDetail() {
+  try {
+    const response = await fetcher.get(`/store/cart/`);
+    return response.data;
+  } catch (error) {
+    console.error("Error fetching cart details:", error);
+    throw error;
+  }
+}
+
+export async function applyDiscount(data: { discount_code: string }) {
+  try {
+    const response = await fetcher.post(`/store/cart/apply-discount/`, data);
+    return response.data;
+  } catch (error) {
+    console.error("Error applying discount:", error);
+    throw error;
+  }
+}
