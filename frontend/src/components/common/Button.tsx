@@ -3,6 +3,7 @@ import { FC, PropsWithChildren, Suspense } from "react";
 
 interface Props extends PropsWithChildren {
   size?: "xl" | "lg" | "md" | "sm";
+  type?: "button" | "reset" | "submit";
   style?: "primary" | "white" | "gray";
   variant?: "contained" | "outlined";
   className?: string;
@@ -16,6 +17,7 @@ const Button: FC<Props> = ({
   size = "md",
   style = "primary",
   variant = "contained",
+  type,
   leftIconUrl,
   rightIconUrl,
   className,
@@ -23,6 +25,7 @@ const Button: FC<Props> = ({
 }) => {
   return (
     <button
+      type={type}
       onClick={onClick}
       className={classNames(
         "cursor-pointer rounded-lg text-white flex gap-x-3 justify-center transition-all duration-300",

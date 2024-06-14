@@ -37,12 +37,12 @@ const ProductPage: FC = () => {
           data: res,
           error: null,
         });
-      } catch (error) {
-        console.log("error:", error);
+      } catch (_error) {
+        const error = _error as Error;
 
         setProductDetailsRes({
           data: null,
-          error: error?.message || "An error was occurred.",
+          error: error.message || "An error was occurred.",
           isLoading: false,
         });
       }

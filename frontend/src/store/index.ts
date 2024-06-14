@@ -3,11 +3,13 @@ import { TypedUseSelectorHook, useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
 
 import cart from "./cart";
+import auth from "./auth";
 
 
 const store = configureStore({
   reducer: {
     cart,
+    auth
   },
 });
 

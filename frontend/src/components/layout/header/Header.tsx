@@ -5,8 +5,10 @@ import HeaderUtils from "./HeaderUtils";
 import Button from "@/components/common/Button";
 import LoginModal from "@/components/modals/LoginModal";
 import classNames from "@/utils/classNames";
+import { useAppSelector } from "@/store";
 
 const Header: FC = () => {
+  const isAuth = useAppSelector((state) => state.auth.isAuth);
   const [showLoginModal, setShowLoginModal] = useState(false);
 
   return (
@@ -26,7 +28,7 @@ const Header: FC = () => {
           <HeaderUtils />
 
           {/* Login/Register Button */}
-          <Button onClick={() => setShowLoginModal(true)}>Login</Button>
+          {!isAuth && <Button onClick={() => setShowLoginModal(true)}>Login</Button>}
         </div>
       </div>
 

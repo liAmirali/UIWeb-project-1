@@ -5,7 +5,7 @@ const initialState: AuthSliceState = {
 };
 
 const slice = createSlice({
-  name: "cart",
+  name: "auth",
   reducers: {
     setAuth(state, action: PayloadAction<boolean>) {
       state.isAuth = action.payload;
@@ -15,5 +15,5 @@ const slice = createSlice({
   initialState,
 });
 
-export const cartActions = slice.actions;
+export const authActions = slice.actions;
 export default slice.reducer;
