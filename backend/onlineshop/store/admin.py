@@ -24,6 +24,7 @@ class ColorInline(admin.TabularInline):
     model = Color
     extra = 1
 
+
 class MediaInline(admin.TabularInline):
     model = Media
     extra = 1
@@ -37,9 +38,10 @@ class ProductAdmin(admin.ModelAdmin):
 
 
 class CategoryAdmin(admin.ModelAdmin):
-    list_display = ('name', 'parent_category')
+    list_display = ('name', 'parent_category', 'level')
     search_fields = ('name',)
     list_filter = ('parent_category',)
+    readonly_fields = ('level',)
 
 
 class DiscountAdmin(admin.ModelAdmin):

@@ -231,7 +231,7 @@ class Category(models.Model):
         else:
             self.level = 0
 
-        if self.level > 5:
+        if self.level >= 5:
             raise ValidationError("Category level cannot be greater than 5.")
 
         super().save(*args, **kwargs)
