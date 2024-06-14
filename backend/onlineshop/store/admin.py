@@ -1,4 +1,5 @@
 from django.contrib import admin
+from django.http import HttpRequest
 from .models import Cart, CartItem, Category, Color, Product, ProductPriceHistory, Discount, Media
 
 
@@ -13,6 +14,9 @@ class CartAdmin(admin.ModelAdmin):
                     'get_discount_value', 'get_net_price')
     search_fields = ('user__username', 'user__email')
     inlines = [CartItemInline]
+
+    def has_delete_permission(self, request, obj=None):
+        return False
 
 
 class ProductPriceHistoryInline(admin.TabularInline):

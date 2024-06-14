@@ -4,7 +4,8 @@ from rest_framework.response import Response
 
 from django.shortcuts import get_object_or_404
 
-from .serializers import ProductSerializer, CartItemSerializer, CartSerializer, CartItemAddRemoveSerializer
+from .serializers import (ProductSerializer, CartItemSerializer,
+                          CartSerializer, CartItemAddRemoveSerializer, AddToCartSerializer)
 from .models import Product, Cart, Color, CartItem, Discount
 
 
@@ -29,12 +30,32 @@ class CartViewSet(viewsets.ModelViewSet):
         cart = self.get_cart()
         serializer = CartSerializer(cart)
         return Response(serializer.data)
-    
+
     def validate_cart_item(self, cart_item_id):
         # Ensure the cart item belongs to the user's cart
         cart = self.get_cart()
         cart_item = get_object_or_404(CartItem, id=cart_item_id, cart=cart)
         return cart_item
+
+    @action(detail=False, methods=['post'])
+    def add_to_cart(self, request):
+        serializer = AddToCartSerializer(data=request.data)
+
+        if serializer.is_valid():
+            product_id = serializer.validated_data['product_id']
+            color_id = serializer.validated_data.get('color_id')
+            quantity = serializer.validated_data.get('quantity', 1)
+
+            product = get_object_or_404(Product, id=product_id)
+            color = get_object_or_404(Color, id=color_id) if color_id else None
+
+            cart = self.get_cart()
+            cart_item, created = CartItem.objects.get_or_create(
+                cart=cart, product=product, color=color, defaults={'quantity': quantity})
+
+            return Response({'status': 'item added'}, status=status.HTTP_200_OK)
+        else:
+            return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
     @action(detail=False, methods=['post'])
     def increment_item(self, request):
@@ -55,13 +76,13 @@ class CartViewSet(viewsets.ModelViewSet):
     @action(detail=False, methods=['post'])
     def decrement_item(self, request):
         serializer = CartItemAddRemoveSerializer(data=request.data)
-        
+
         if serializer.is_valid():
             cart_item_id = serializer.validated_data['cart_item_id']
             quantity = serializer.validated_data['quantity']
 
             cart_item = self.validate_cart_item(cart_item_id)
-            
+
             if cart_item.quantity > quantity:
                 cart_item.quantity -= quantity
                 cart_item.save()
