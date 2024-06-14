@@ -35,7 +35,7 @@ const HeaderUtils: FC = () => {
             <span className="font-bold text-white text-sm">{totalCartQuantity}</span>
           </div>
 
-          {showCart && <CartList open={showCart} setOpen={setShowCart} />}
+          <CartList open={showCart} setOpen={setShowCart} />
         </div>
       )}
     </div>

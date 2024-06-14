@@ -50,7 +50,7 @@ export async function addToCart(data: {
   }
 }
 
-export async function incrementCartItem(data: { cart_item_id: string; quantity: number }) {
+export async function incrementCartItem(data: { cart_item_id: number; quantity: number }) {
   try {
     const response = await fetcher.post(`/store/cart/increment/`, data);
     return response.data;
@@ -60,7 +60,7 @@ export async function incrementCartItem(data: { cart_item_id: string; quantity: 
   }
 }
 
-export async function decrementCartItem(data: { cart_item_id: string; quantity: number }) {
+export async function decrementCartItem(data: { cart_item_id: number; quantity: number }) {
   try {
     const response = await fetcher.post(`/store/cart/decrement/`, data);
     return response.data;

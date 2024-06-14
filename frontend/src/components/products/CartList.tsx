@@ -5,7 +5,7 @@ import TrashIcon from "@/public/icons/huge-icon/interface/outline/trash.svg?reac
 import Button from "../common/Button";
 import { useAppDispatch, useAppSelector } from "@/store";
 import { cartActions } from "@/store/cart";
-import { getCartDetail } from "@/api";
+import { decrementCartItem, getCartDetail } from "@/api";
 
 interface Props extends ModalProps {}
 
@@ -19,8 +19,9 @@ const CartList: FC<Props> = ({ open, setOpen }) => {
     setOpen(false);
   };
 
-  const handleRemoveClick = (item: CartItem) => {
-    // dispatch(cartActions.removeItem({ id: item.product.id }));
+  const handleRemoveClick = async (item: CartItem) => {
+    await decrementCartItem({ cart_item_id: item.id, quantity: item.quantity });
+    dispatch(cartActions.setCacheValid(false));
   };
 
   useEffect(() => {

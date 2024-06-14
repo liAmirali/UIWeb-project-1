@@ -11,6 +11,8 @@ const slice = createSlice({
   reducers: {
     setCartItems(state, action: PayloadAction<CartItem[]>) {
       state.items = action.payload;
+
+      state.totalQuantity = action.payload.reduce((acc, item) => acc + item.quantity, 0);
     },
 
     setCacheValid(state, action: PayloadAction<boolean>) {
