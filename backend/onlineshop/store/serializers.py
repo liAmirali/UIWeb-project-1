@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import Product, Color, Cart, CartItem, Discount
+from .models import Product, Color, Cart, CartItem, Discount, Media
 
 
 class ColorSerializer(serializers.ModelSerializer):
@@ -15,14 +15,22 @@ class DiscountSerializer(serializers.ModelSerializer):
                   'applicable_products', 'applicable_categories']
 
 
+class MediaSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Media
+        fields = ['id', 'type', 'file', 'alt']
+
+
 class ProductSerializer(serializers.ModelSerializer):
     price = serializers.DecimalField(
         source='get_latest_price', max_digits=10, decimal_places=2)
     colors = ColorSerializer(many=True, read_only=True)
+    media = MediaSerializer(many=True, read_only=True)
 
     class Meta:
         model = Product
-        fields = ['id', 'title', 'description', 'rating', 'price', 'colors']
+        fields = ['id', 'title', 'description', 'rating',
+                  'price', 'colors', 'media', 'category']
 
 
 class CartItemSerializer(serializers.ModelSerializer):

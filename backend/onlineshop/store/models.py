@@ -170,6 +170,23 @@ class Product(models.Model):
         return self.title
 
 
+def media_upload_path(instance, filename):
+    return f"media/{instance.product.id}/{filename}"
+
+
+class Media(models.Model):
+    MEDIA_CHOICES = [
+        ('image', 'Image'),
+        ('video', 'Video'),
+    ]
+
+    type = models.CharField(max_length=5, choices=MEDIA_CHOICES)
+    file = models.FileField(upload_to=media_upload_path)
+    product = models.ForeignKey(
+        Product, on_delete=models.CASCADE, related_name='media')
+    alt = models.CharField(max_length=100)
+
+
 class ProductPriceHistory(models.Model):
     date = models.DateTimeField(auto_now_add=True, db_index=True)
     price = models.DecimalField(max_digits=10, decimal_places=2, validators=[

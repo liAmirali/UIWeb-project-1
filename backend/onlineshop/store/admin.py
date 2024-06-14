@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Cart, CartItem, Category, Color, Product, ProductPriceHistory, Discount
+from .models import Cart, CartItem, Category, Color, Product, ProductPriceHistory, Discount, Media
 
 
 class CartItemInline(admin.TabularInline):
@@ -24,12 +24,16 @@ class ColorInline(admin.TabularInline):
     model = Color
     extra = 1
 
+class MediaInline(admin.TabularInline):
+    model = Media
+    extra = 1
+
 
 class ProductAdmin(admin.ModelAdmin):
     list_display = ('title', 'category', 'rating', 'get_latest_price')
     search_fields = ('title', 'category__name')
     list_filter = ('category', 'rating')
-    inlines = [ColorInline, ProductPriceHistoryInline]
+    inlines = [ColorInline, ProductPriceHistoryInline, MediaInline]
 
 
 class CategoryAdmin(admin.ModelAdmin):
