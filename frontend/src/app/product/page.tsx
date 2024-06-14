@@ -18,8 +18,6 @@ const ProductPage: FC = () => {
     isLoading: false,
   });
 
-  console.log("productId:", productId);
-
   useEffect(() => {
     const fetchProduct = async () => {
       try {

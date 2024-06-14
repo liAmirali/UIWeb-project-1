@@ -1,8 +1,9 @@
-import { LS_ACCESS_TOKEN } from "@/constants/localStorage";
+import { LS_ACCESS_TOKEN, LS_REFRESH_TOKEN } from "@/constants/localStorage";
+import { API_SERVER_ADDR } from "@/constants/urls";
 import axios from "axios";
 
 // Get the base URL from an environment variable
-const baseURL = import.meta.env.VITE_API_SERVER_ADDR + "/api";
+const baseURL = API_SERVER_ADDR + "/api";
 console.log("baseUrl:", baseURL);
 
 // Create an instance of Axios with the base URL
@@ -29,8 +30,9 @@ fetcher.interceptors.response.use(
     if (error.response?.status === 401 && !originalRequest._retry) {
       originalRequest._retry = true;
 
-      const res = await fetcher.post("/auth/refresh/");
-      const newAccessToken = res.data.access_token;
+      const refreshToken = localStorage.getItem(LS_REFRESH_TOKEN);
+      const res = await fetcher.post("/auth/refresh/", { refresh: refreshToken });
+      const newAccessToken = res.data.access;
 
       localStorage.setItem(LS_ACCESS_TOKEN, newAccessToken);
 

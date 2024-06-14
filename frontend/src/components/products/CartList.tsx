@@ -6,6 +6,7 @@ import Button from "../common/Button";
 import { useAppDispatch, useAppSelector } from "@/store";
 import { cartActions } from "@/store/cart";
 import { decrementCartItem, getCartDetail } from "@/api";
+import { API_SERVER_ADDR } from "@/constants/urls";
 
 interface Props extends ModalProps {}
 
@@ -55,7 +56,14 @@ const CartList: FC<Props> = ({ open, setOpen }) => {
           {cartItems.map((item, i) => (
             <div key={i} className="flex gap-x-2 pt-3 relative">
               <div className="bg-gray-500 bg-opacity-5 p-2">
-                <img src={item.product.image} alt={item.product.title} width="41" height="50" />
+                {item.product.media.length > 0 && (
+                  <img
+                    src={API_SERVER_ADDR + item.product.media[0].file}
+                    alt={item.product.title}
+                    width="41"
+                    height="50"
+                  />
+                )}
               </div>
 
               <div className="flex flex-col gap-y-1">

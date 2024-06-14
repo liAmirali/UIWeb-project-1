@@ -19,8 +19,15 @@ type ProductT = {
   description: string;
   price: number;
   rating: number;
-  image: string;
+  media: MediaT[];
   colors: ColorT[] | null;
+};
+
+type MediaT = {
+  id: number;
+  type: "image" | "video";
+  file: string;
+  alt: string;
 };
 
 type ReviewItemT = {

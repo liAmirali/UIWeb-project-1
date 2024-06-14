@@ -20,6 +20,14 @@ class MediaSerializer(serializers.ModelSerializer):
         model = Media
         fields = ['id', 'type', 'file', 'alt']
 
+    def to_representation(self, value):
+        return {
+            "id": value.id,
+            "type": value.type,
+            "file": value.file.url,
+            "alt": value.alt
+        }
+
 
 class ProductSerializer(serializers.ModelSerializer):
     price = serializers.DecimalField(
@@ -40,6 +48,7 @@ class CartItemSerializer(serializers.ModelSerializer):
     class Meta:
         model = CartItem
         fields = ['id', 'product', 'color', 'quantity']
+
 
 class AddToCartSerializer(serializers.ModelSerializer):
     product_id = serializers.IntegerField()

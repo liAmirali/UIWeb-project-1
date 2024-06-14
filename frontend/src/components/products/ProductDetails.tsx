@@ -83,7 +83,7 @@ const ProductDetails: FC<Props> = ({ product }) => {
         </div>
       </div>
 
-      <ProductImages className="flex-1" />
+      <ProductImages media={product.media} className="flex-1" />
     </div>
   );
 };
