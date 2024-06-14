@@ -19,3 +19,19 @@ export async function postLoginInfo(data: { username: string; password: string }
     throw error;
   }
 }
+
+export async function postSingUpInfo(data: {
+  firstName: string;
+  lastName: string;
+  email: string;
+  username: string;
+  password: string;
+}) {
+  try {
+    const response = await fetcher.post(`/auth/signup/`, data);
+    return response.data;
+  } catch (error) {
+    console.error("Error posting signup information:", error);
+    throw error;
+  }
+}

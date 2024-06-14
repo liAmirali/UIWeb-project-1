@@ -1,4 +1,4 @@
-import { FC, FormEventHandler, useEffect, useState } from "react";
+import { FC, FormEventHandler, useCallback, useEffect, useState } from "react";
 import Modal from "../common/Modal";
 import Card from "../common/Card";
 import Input from "../common/Input";
@@ -25,18 +25,15 @@ const LoginModal: FC<Props> = ({ open, setOpen }) => {
 
   const [showRegisterModal, setShowRegisterModal] = useState(false);
 
-  const [usernameInputValue, setUsernameInputValue] = useState("");
-  const [passwordInputValue, setPasswordInputValue] = useState("");
-
   const [postLoginRes, setPostLoginRes] = useState<ApiCallStatus<LoginResT>>({
     data: null,
     error: null,
     isLoading: false,
   });
 
-  const handleClose = () => {
+  const handleClose = useCallback(() => {
     setOpen(false);
-  };
+  }, [setOpen]);
 
   const handleFormSubmit: FormEventHandler<HTMLFormElement> = async (e) => {
     e.preventDefault();
@@ -112,8 +109,6 @@ const LoginModal: FC<Props> = ({ open, setOpen }) => {
                 placeholder="example@gmail.com"
                 autoComplete="off"
                 required
-                value={usernameInputValue}
-                onChange={(e) => setUsernameInputValue(e.target.value)}
               />
 
               <Input
@@ -124,8 +119,6 @@ const LoginModal: FC<Props> = ({ open, setOpen }) => {
                 placeholder="••••••••••"
                 autoComplete="off"
                 required
-                value={passwordInputValue}
-                onChange={(e) => setPasswordInputValue(e.target.value)}
               />
             </div>
 
