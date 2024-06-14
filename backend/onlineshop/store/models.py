@@ -216,7 +216,8 @@ class Category(models.Model):
     name = models.CharField(max_length=200)
     parent_category = models.ForeignKey(
         'Category', on_delete=models.CASCADE, related_name='subcategories', default=None, null=True, blank=True)
-    level = models.IntegerField(default=0, min_value=0)
+    level = models.IntegerField(default=0, validators=[
+                                MinValueValidator(0), MaxValueValidator(5)])
 
     class Meta():
         verbose_name_plural = "categories"
