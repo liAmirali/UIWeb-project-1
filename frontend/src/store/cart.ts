@@ -1,38 +1,17 @@
 import { PayloadAction, createSlice } from "@reduxjs/toolkit";
 
 const initialState: CartSliceState = {
-  items: [
-    {
-      product: {
-        id: "1",
-        title: "Apple iPhone 14 Pro",
-        price: 1999,
-        image: "/images/products/iphone/iphone-small.png",
-        rating: 4,
-      },
-      quantity: 1,
-    },
-    {
-      product: {
-        id: "2",
-        title: "Asus ROG Delta S",
-        price: 250,
-        image: "/images/products/top-selling/image 25.png",
-        rating: 5,
-      },
-      quantity: 1,
-    },
-  ],
-  totalQuantity: 2,
+  items: [],
+  totalQuantity: 0,
 };
 
 const slice = createSlice({
   name: "cart",
   reducers: {
-    increaseQuantity: (
+    increaseQuantity(
       state,
       action: PayloadAction<{ id: string; product?: ProductT; quantity?: number }>
-    ) => {
+    ) {
       const { id: productId, product, quantity } = action.payload;
 
       let found = false;
@@ -54,12 +33,12 @@ const slice = createSlice({
       }
     },
 
-    removeItem: (state, action: PayloadAction<{ id: string }>) => {
+    removeItem(state, action: PayloadAction<{ id: string }>) {
       const { id: productId } = action.payload;
 
       state.items = state.items.filter((item) => item.product.id !== productId);
       state.totalQuantity = state.items.reduce((a, b) => {
-        return a + b.quantity
+        return a + b.quantity;
       }, 0);
     },
   },
