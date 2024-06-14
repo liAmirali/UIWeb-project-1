@@ -40,7 +40,7 @@ const RegisterModal: FC<Props> = ({ open, setOpen }) => {
     const usernameInput = target.username as HTMLInputElement;
     const passwordInput = target.password as HTMLInputElement;
 
-    if (usernameInput && passwordInput) {
+    if (emailInput && usernameInput && passwordInput) {
       setPostRegisterRes((p) => ({
         ...p,
         isLoading: true,
@@ -67,6 +67,8 @@ const RegisterModal: FC<Props> = ({ open, setOpen }) => {
           isLoading: false,
         });
       }
+    } else {
+      toast("Fill out all required inputs.", { type: "info" });
     }
   };
 
