@@ -63,10 +63,17 @@ class AddToCartSerializer(serializers.ModelSerializer):
 class CartSerializer(serializers.ModelSerializer):
     cart_items = CartItemSerializer(many=True, read_only=True)
     discount = DiscountSerializer(read_only=True)
+    total_cost = serializers.DecimalField(
+        source='get_total_cost', max_digits=10, decimal_places=2)
+    discount_value = serializers.DecimalField(
+        source='get_discount_value', max_digits=10, decimal_places=2)
+    net_price = serializers.DecimalField(
+        source='get_net_price', max_digits=10, decimal_places=2)
 
     class Meta:
         model = Cart
-        fields = ['cart_items', 'discount']
+        fields = ['cart_items', 'discount', 'total_cost',
+                  'discount_value', 'net_price']
 
 
 class CartItemAddRemoveSerializer(serializers.Serializer):

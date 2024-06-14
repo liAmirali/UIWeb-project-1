@@ -7,6 +7,7 @@ import { useAppDispatch, useAppSelector } from "@/store";
 import { cartActions } from "@/store/cart";
 import { decrementCartItem, getCartDetail } from "@/api";
 import { API_SERVER_ADDR } from "@/constants/urls";
+import DiscountRedeem from "./DiscountRedeem";
 
 interface Props extends ModalProps {}
 
@@ -14,7 +15,7 @@ const CartList: FC<Props> = ({ open, setOpen }) => {
   const dispatch = useAppDispatch();
   const isCacheValid = useAppSelector((state) => state.cart.isCacheValid);
 
-  const cartItems = useAppSelector((state) => state.cart.items);
+  const cart = useAppSelector((state) => state.cart);
 
   const handleClose = () => {
     setOpen(false);
@@ -30,7 +31,7 @@ const CartList: FC<Props> = ({ open, setOpen }) => {
       const fetchCartDetail = async () => {
         try {
           const res = await getCartDetail();
-          dispatch(cartActions.setCartItems(res.cart_items));
+          dispatch(cartActions.setCart(res));
           dispatch(cartActions.setCacheValid(true));
         } catch (_error) {
           /* empty */
@@ -47,13 +48,13 @@ const CartList: FC<Props> = ({ open, setOpen }) => {
         <span>
           You have{" "}
           <span className="font-bold">
-            {cartItems.length} item{cartItems.length !== 1 ? "s" : ""}
+            {cart.items.length} item{cart.items.length !== 1 ? "s" : ""}
           </span>{" "}
           in your cart
         </span>
 
         <div className="space-y-3 divide-y">
-          {cartItems.map((item, i) => (
+          {cart.items.map((item, i) => (
             <div key={i} className="flex gap-x-2 pt-3 relative">
               <div className="bg-gray-500 bg-opacity-5 p-2">
                 {item.product.media.length > 0 && (
@@ -82,17 +83,26 @@ const CartList: FC<Props> = ({ open, setOpen }) => {
           ))}
         </div>
 
-        <div className="space-y-6 !mt-auto">
-          <div className="flex justify-between font-bold">
-            <span>Subtotal</span>
-            <span>
-              $
-              {cartItems
-                .reduce((a, b) => {
-                  return a + b.product.price * b.quantity;
-                }, 0)
-                .toFixed(2)}
-            </span>
+        <DiscountRedeem wrapperClassName="!mt-auto" />
+
+        <div className="space-y-6">
+          <div className="flex flex-col">
+            {cart.discount_value && (
+              <>
+              <div className="flex justify-between">
+                <span>Total Cost</span>
+                <span>${cart.total_cost}</span>
+              </div>
+              <div className="flex justify-between text-green-600">
+                <span>Discount</span>
+                <span>-${cart.discount_value}</span>
+              </div></>
+            )}
+
+            <div className="flex justify-between font-bold">
+              <span>Subtotal</span>
+              <span>${cart.net_price}</span>
+            </div>
           </div>
 
           <div className="flex flex-col gap-y-2">

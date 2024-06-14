@@ -40,6 +40,15 @@ type ReviewItemT = {
   reviewBy: string;
 };
 
+type DiscountT = {
+  code: string;
+  type: "PERCENTAGE" | "VALUE";
+  value: number;
+  max_price_limit: null | number;
+  applicable_products: number[];
+  applicable_categories: number[];
+};
+
 interface ModalProps {
   open: boolean;
   setOpen: React.Dispatch<React.SetStateAction<boolean>>;
