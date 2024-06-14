@@ -5,11 +5,16 @@ import ProductPage from "./app/product/page";
 
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import { Provider as ReduxProvider } from "react-redux";
 
-import store from "@/store";
+import { useEffect } from "react";
+import { getFromLocalStorage } from "./utils/localStorage";
+import { LS_ACCESS_TOKEN } from "./constants/localStorage";
+import { useAppDispatch } from "./store";
+import { authActions } from "./store/auth";
 
 function App() {
+  const dispatch = useAppDispatch();
+
   const router = createBrowserRouter([
     {
       path: "/",
@@ -27,11 +32,19 @@ function App() {
     },
   ]);
 
+  useEffect(() => {
+    // Checks if user is logged in
+    const accessToken = getFromLocalStorage(LS_ACCESS_TOKEN);
+    if (accessToken) {
+      dispatch(authActions.setAuth(true));
+    }
+  }, [dispatch]);
+
   return (
-    <ReduxProvider store={store}>
+    <>
       <RouterProvider router={router} />
       <ToastContainer />
-    </ReduxProvider>
+    </>
   );
 }
 
