@@ -34,10 +34,10 @@ const HeaderUtils: FC = () => {
           <div className="size-4 absolute -top-2 -right-2 rounded-full bg-primary-500 z-[1] flex items-center justify-center p-2.5">
             <span className="font-bold text-white text-sm">{totalCartQuantity}</span>
           </div>
+
+          {showCart && <CartList open={showCart} setOpen={setShowCart} />}
         </div>
       )}
-
-      {showCart && <CartList open={showCart} setOpen={setShowCart} />}
     </div>
   );
 };
