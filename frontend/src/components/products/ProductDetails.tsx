@@ -9,6 +9,8 @@ import Button from "../common/Button";
 import ProductCounter from "./ProductCounter";
 import { useAppDispatch } from "@/store";
 import { cartActions } from "@/store/cart";
+import { addToCart } from "@/api";
+import { toast } from "react-toastify";
 
 interface Props {
   product: ProductT;
@@ -27,14 +29,15 @@ const ProductDetails: FC<Props> = ({ product }) => {
     setSelectedColor(color);
   };
 
-  const handleAddToCartClick = () => {
-    dispatch(
-      cartActions.increaseQuantity({
-        id: product.id,
-        product: product,
-        quantity: quantityCounter,
-      })
-    );
+  const handleAddToCartClick = async () => {
+    await addToCart({
+      product_id: product.id,
+      color_id: selectedColor?.id,
+      quantity: quantityCounter,
+    });
+
+    dispatch(cartActions.setCacheValid(false));
+    toast("Items were added to cart.", { type: "success" });
   };
 
   return (

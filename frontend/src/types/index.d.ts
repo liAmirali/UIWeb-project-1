@@ -14,7 +14,7 @@ type ColorT = {
 };
 
 type ProductT = {
-  id: string;
+  id: number;
   title: string;
   description: string;
   price: number;
