@@ -5,7 +5,7 @@ from rest_framework.response import Response
 from django.shortcuts import get_object_or_404
 
 from .serializers import ProductSerializer, CartItemSerializer, CartSerializer
-from .models import Product, Cart, Color, CartItem
+from .models import Product, Cart, Color, CartItem, Discount
 
 
 class ProductListView(viewsets.ReadOnlyModelViewSet):
@@ -88,3 +88,21 @@ class CartViewSet(viewsets.ModelViewSet):
                 return Response({'error': 'Item not found in cart'}, status=status.HTTP_404_NOT_FOUND)
         else:
             return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+        
+    @action(detail=False, methods=['post'])
+    def apply_discount(self, request):
+        cart = self.get_cart()
+        discount_code = request.data.get('discount_code')
+
+        if not discount_code:
+            return Response({'error': 'Discount code is required'}, status=status.HTTP_400_BAD_REQUEST)
+
+        try:
+            discount = Discount.objects.get(code=discount_code)
+        except Discount.DoesNotExist:
+            return Response({'error': 'Invalid discount code'}, status=status.HTTP_404_NOT_FOUND)
+
+        cart.discount = discount
+        cart.save()
+
+        return Response({'status': 'discount applied'}, status=status.HTTP_200_OK)

@@ -125,7 +125,7 @@ class Discount(models.Model):
         VALUE = "VALUE"
         PERCENTAGE = "PERCENTAGE"
 
-    code = models.CharField(max_length=8)
+    code = models.CharField(max_length=20)
     type = models.CharField(
         max_length=10, choices=DiscountType, default=DiscountType.VALUE)
     value = models.DecimalField(
