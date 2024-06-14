@@ -11,6 +11,8 @@ urlpatterns = [
         {'post': "add_item"}), name="add-to-cart"),
     path("cart/clear/", views.CartViewSet.as_view(
         {'post': "clear_cart"}), name="clear-cart"),
+    path("cart/remove/", views.CartViewSet.as_view(
+        {'post': "decrement_item"}), name="remove-cart-item"),
     path("cart/", views.CartViewSet.as_view(
         {'get': "list"}), name="cart-detail"),
 ]
