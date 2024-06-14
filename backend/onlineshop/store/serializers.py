@@ -3,8 +3,9 @@ from .models import Product, Color
 
 
 class ColorSerializer(serializers.ModelSerializer):
-    extra_cost = serializers.DecimalField(max_digits=10, decimal_places=2, coerce_to_string=False)
-   
+    extra_cost = serializers.DecimalField(
+        max_digits=10, decimal_places=2, coerce_to_string=False)
+
     class Meta:
         model = Color
         fields = ["id", "name", "hex_code", "extra_cost"]
