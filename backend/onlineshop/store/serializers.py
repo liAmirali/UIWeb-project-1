@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import Product, Color
+from .models import Product, Color, Cart, CartItem
 
 
 class ColorSerializer(serializers.ModelSerializer):
@@ -19,3 +19,17 @@ class ProductSerializer(serializers.ModelSerializer):
     class Meta:
         model = Product
         fields = ['id', 'title', 'description', 'rating', 'price', 'colors']
+
+
+class CartItemSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = CartItem
+        fields = ['product', 'color', 'quantity']
+
+
+class CartSerializer(serializers.ModelSerializer):
+    cart_items = CartItemSerializer(many=True, read_only=True)
+
+    class Meta:
+        model = Cart
+        fields = ['cart_items']
