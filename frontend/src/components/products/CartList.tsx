@@ -28,7 +28,7 @@ const CartList: FC<Props> = ({ open, setOpen }) => {
       const fetchCartDetail = async () => {
         try {
           const res = await getCartDetail();
-          dispatch(cartActions.setCartItems(res));
+          dispatch(cartActions.setCartItems(res.cart_items));
           dispatch(cartActions.setCacheValid(true));
         } catch (_error) {
           /* empty */
