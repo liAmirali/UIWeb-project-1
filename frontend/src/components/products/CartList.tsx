@@ -1,15 +1,17 @@
-import { FC } from "react";
+import { FC, useEffect } from "react";
 import Modal from "../common/Modal";
 
 import TrashIcon from "@/public/icons/huge-icon/interface/outline/trash.svg?react";
 import Button from "../common/Button";
 import { useAppDispatch, useAppSelector } from "@/store";
 import { cartActions } from "@/store/cart";
+import { getCartDetail } from "@/api";
 
 interface Props extends ModalProps {}
 
 const CartList: FC<Props> = ({ open, setOpen }) => {
   const dispatch = useAppDispatch();
+  const isCacheValid = useAppSelector((state) => state.cart.isCacheValid);
 
   const cartItems = useAppSelector((state) => state.cart.items);
 
@@ -18,8 +20,24 @@ const CartList: FC<Props> = ({ open, setOpen }) => {
   };
 
   const handleRemoveClick = (item: CartItem) => {
-    dispatch(cartActions.removeItem({ id: item.product.id }));
+    // dispatch(cartActions.removeItem({ id: item.product.id }));
   };
+
+  useEffect(() => {
+    if (!isCacheValid) {
+      const fetchCartDetail = async () => {
+        try {
+          const res = await getCartDetail();
+          dispatch(cartActions.setCartItems(res));
+          dispatch(cartActions.setCacheValid(true));
+        } catch (_error) {
+          /* empty */
+        }
+      };
+
+      fetchCartDetail();
+    }
+  }, [dispatch, isCacheValid]);
 
   return (
     <Modal open={open} onClose={handleClose} className="!justify-end items-stretch" noCloseButton>

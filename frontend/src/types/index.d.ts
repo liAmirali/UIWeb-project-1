@@ -1,5 +1,8 @@
 type CartItem = {
+  id: number;
   product: ProductT;
+  color: ColorT;
+  quantity: number;
   quantity: number;
 };
 
