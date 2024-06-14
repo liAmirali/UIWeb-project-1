@@ -216,12 +216,24 @@ class Category(models.Model):
     name = models.CharField(max_length=200)
     parent_category = models.ForeignKey(
         'Category', on_delete=models.CASCADE, related_name='subcategories', default=None, null=True, blank=True)
+    level = models.IntegerField(default=0, min_value=0)
 
     class Meta():
         verbose_name_plural = "categories"
 
     def __str__(self) -> str:
         return self.name
+
+    def save(self, *args, **kwargs):
+        if self.parent_category:
+            self.level = self.parent_category.level + 1
+        else:
+            self.level = 0
+
+        if self.level > 5:
+            raise ValidationError("Category level cannot be greater than 5.")
+
+        super().save(*args, **kwargs)
 
     def is_inside_category(self, cat: 'Category') -> bool:
         if cat == self:
