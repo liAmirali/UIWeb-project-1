@@ -4,7 +4,7 @@ from rest_framework.response import Response
 
 from django.shortcuts import get_object_or_404
 
-from .serializers import ProductSerializer, CartItemSerializer, CartSerializer
+from .serializers import ProductSerializer, CartItemSerializer, CartSerializer, CartItemAddRemoveSerializer
 from .models import Product, Cart, Color, CartItem, Discount
 
 
@@ -29,31 +29,46 @@ class CartViewSet(viewsets.ModelViewSet):
         cart = self.get_cart()
         serializer = CartSerializer(cart)
         return Response(serializer.data)
+    
+    def validate_cart_item(self, cart_item_id):
+        # Ensure the cart item belongs to the user's cart
+        cart = self.get_cart()
+        cart_item = get_object_or_404(CartItem, id=cart_item_id, cart=cart)
+        return cart_item
 
     @action(detail=False, methods=['post'])
-    def add_item(self, request):
-        cart = self.get_cart()
-        serializer = CartItemSerializer(data=request.data)
+    def increment_item(self, request):
+        serializer = CartItemAddRemoveSerializer(data=request.data)
 
         if serializer.is_valid():
-            product = get_object_or_404(
-                Product, id=serializer.validated_data['product'].id)
-            color = serializer.validated_data.get('color')
-            if color:
-                color = get_object_or_404(Color, id=color.id)
+            cart_item_id = serializer.validated_data['cart_item_id']
+            quantity = serializer.validated_data['quantity']
 
-            cart_item, created = CartItem.objects.get_or_create(
-                cart=cart,
-                product=product,
-                color=color,
-                defaults={'quantity': serializer.validated_data['quantity']}
-            )
+            cart_item = self.validate_cart_item(cart_item_id)
+            cart_item.quantity += quantity
+            cart_item.save()
 
-            if not created:
-                cart_item.quantity += serializer.validated_data['quantity']
+            return Response({'status': 'item added'}, status=status.HTTP_200_OK)
+        else:
+            return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+    @action(detail=False, methods=['post'])
+    def decrement_item(self, request):
+        serializer = CartItemAddRemoveSerializer(data=request.data)
+        
+        if serializer.is_valid():
+            cart_item_id = serializer.validated_data['cart_item_id']
+            quantity = serializer.validated_data['quantity']
+
+            cart_item = self.validate_cart_item(cart_item_id)
+            
+            if cart_item.quantity > quantity:
+                cart_item.quantity -= quantity
                 cart_item.save()
+            else:
+                cart_item.delete()
 
-            return Response({'status': 'items added'}, status=status.HTTP_200_OK)
+            return Response({'status': 'item decremented'}, status=status.HTTP_200_OK)
         else:
             return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
@@ -62,33 +77,7 @@ class CartViewSet(viewsets.ModelViewSet):
         cart = self.get_cart()
         cart.cart_items.all().delete()
         return Response({'status': 'cart cleared'}, status=status.HTTP_200_OK)
-    
-    @action(detail=False, methods=['post'])
-    def decrement_item(self, request):
-        cart = self.get_cart()
-        serializer = CartItemSerializer(data=request.data)
-        
-        if serializer.is_valid():
-            product = get_object_or_404(Product, id=serializer.validated_data['product'].id)
-            color = serializer.validated_data.get('color')
-            if color:
-                color = get_object_or_404(Color, id=color.id)
 
-            try:
-                cart_item = CartItem.objects.get(cart=cart, product=product, color=color)
-                quantity_to_decrease = serializer.validated_data['quantity']
-                if cart_item.quantity > quantity_to_decrease:
-                    cart_item.quantity -= quantity_to_decrease
-                    cart_item.save()
-                else:
-                    cart_item.delete()
-
-                return Response({'status': 'item decremented'}, status=status.HTTP_200_OK)
-            except CartItem.DoesNotExist:
-                return Response({'error': 'Item not found in cart'}, status=status.HTTP_404_NOT_FOUND)
-        else:
-            return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-        
     @action(detail=False, methods=['post'])
     def apply_discount(self, request):
         cart = self.get_cart()

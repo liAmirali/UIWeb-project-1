@@ -45,13 +45,13 @@ class Cart(models.Model):
 
         if discount.type == Discount.DiscountType.PERCENTAGE:
             discount_value_to_apply = discount.value * applicable_products_cost / 100
-            if discount_value_to_apply > discount.max_price_limit:
+            if discount.max_price_limit is not None and discount_value_to_apply > discount.max_price_limit:
                 return 0
             else:
                 return discount_value_to_apply
         elif discount.type == Discount.DiscountType.VALUE:
             discount_value_to_apply = discount.value
-            if discount_value_to_apply > discount.max_price_limit:
+            if discount.max_price_limit is not None and discount_value_to_apply > discount.max_price_limit:
                 return 0
             else:
                 return discount_value_to_apply
@@ -131,7 +131,7 @@ class Discount(models.Model):
     value = models.DecimalField(
         max_digits=10, decimal_places=2, validators=[MinValueValidator(0)])
     max_price_limit = models.DecimalField(max_digits=10, decimal_places=2, validators=[
-        MinValueValidator(0)], null=True)
+        MinValueValidator(0)], null=True, blank=True)
 
     applicable_products = models.ManyToManyField(
         'Product', blank=True)

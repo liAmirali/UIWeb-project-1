@@ -137,7 +137,8 @@ REST_FRAMEWORK = {
     ],
     'DEFAULT_AUTHENTICATION_CLASSES': [
         'rest_framework_simplejwt.authentication.JWTAuthentication',
-    ]
+    ],
+    'COERCE_DECIMAL_TO_STRING': False
 }
 
 # CORS Settings

@@ -8,11 +8,11 @@ urlpatterns = [
         {'get': 'retrieve'}), name="products-details"),
 
     path("cart/add/", views.CartViewSet.as_view(
-        {'post': "add_item"}), name="add-to-cart"),
+        {'post': "increment_item"}), name="increment-item"),
+    path("cart/remove/", views.CartViewSet.as_view(
+        {'post': "decrement_item"}), name="decrement-item"),
     path("cart/clear/", views.CartViewSet.as_view(
         {'post': "clear_cart"}), name="clear-cart"),
-    path("cart/remove/", views.CartViewSet.as_view(
-        {'post': "decrement_item"}), name="remove-cart-item"),
     path("cart/", views.CartViewSet.as_view(
         {'get': "list"}), name="cart-detail"),
     path("cart/apply-discount/", views.CartViewSet.as_view(
